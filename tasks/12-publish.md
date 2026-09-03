@@ -55,7 +55,7 @@ Bước 3: git remote add origin https://github.com/<user>/fashion-shop-security
 
 ```
 □ App TrendThreads chạy local, 4 vuln tái hiện được
-□ findings/ — 4 reports + index (tiếng Anh)
+□ findings/ — 4 reports + index (tiếng Anh) · README (tiếng Việt)
 □ docs/OWASP-checklist.md + docs/tool-guide.md
 □ csrf-poc.html
 □ screenshots/ — evidence đủ (D13)

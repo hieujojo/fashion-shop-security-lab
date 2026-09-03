@@ -1,8 +1,9 @@
-# Tasks 11: Reports + Docs (tiếng Anh) + README
+# Tasks 11: Reports + Docs (findings tiếng Anh) + README (tiếng Việt)
 
 > Phase 4 · Người làm: AI draft → **chủ nhân đọc, hiểu, sửa bằng lời của mình** (bắt buộc).
 > Mục tiêu: bộ deliverables public trông như security engineer thật viết.
-> Toàn bộ nội dung public bằng TIẾNG ANH (D11).
+> Ngôn ngữ (D11 — cập nhật 2026-09-03): README.md → TIẾNG VIỆT · findings/*.md +
+> docs/OWASP-checklist.md + docs/tool-guide.md → TIẾNG ANH.
 
 ---
 
@@ -156,7 +157,7 @@ documents, checklists" trong JD.
 → Khi phỏng vấn "bạn dùng tool gì" → chỉ vào file này kể.
 ```
 
-## README.md (tiếng Anh — bộ mặt repo)
+## README.md (tiếng VIỆT — bộ mặt repo)
 
 ```
 1. Banner to: ⚠️ DELIBERATELY VULNERABLE — EDUCATIONAL PURPOSES ONLY. DO NOT DEPLOY.
@@ -178,7 +179,7 @@ Không badge CI/CD (không có), không thổi phồng số liệu (rules.md rul
 ```
 □ 4 findings + index: đủ 8 mục, tiếng Anh, payload copy được, ảnh evidence đúng tên
 □ Chủ nhân ĐÃ đọc + tự viết lại 4 mục (4/5/7) mỗi report — không phải bản AI nguyên si
-□ OWASP-checklist.md + tool-guide.md + README.md xong (tiếng Anh)
+□ OWASP-checklist.md + tool-guide.md xong (tiếng Anh) + README.md xong (tiếng Việt)
 □ Đọc lại 1 lần như người lạ: có chỗ nào "không hiểu" → sửa tới khi mạch lạc
 □ Tick PROGRESS.md Phase 4
 □ Ghi HANDOVER.md → Phase 5 (tasks/12)

@@ -103,13 +103,15 @@ Chỉ hiển thị. Cần role='admin'. Default creds admin/admin123 (F04-1).
 Admin page hiển thị reviews MỚI NHẤT và render HTML thô → nơi F02 kích hoạt.
 ```
 
-## D11. Report/docs public: TIẾNG ANH
+## D11. Ngôn ngữ tài liệu (CẬP NHẬT 2026-09-03)
 
 ```
-README.md, findings/*.md, docs/OWASP-checklist.md, docs/tool-guide.md → English
-Lý do: JD yêu cầu "ability to read English technical documents"; team ZOZO Nhật/Mỹ/NZ;
-  English reports còn là bằng chứng trực tiếp cho dòng đó của JD.
-Docs planning (agent/, tasks/) → tiếng Việt (chỉ mình dùng).
+README.md → TIẾNG VIỆT (chủ nhân chốt — repo giới thiệu cho người Việt đọc trước)
+findings/*.md, docs/OWASP-checklist.md, docs/tool-guide.md → TIẾNG ANH (giữ nguyên)
+  Lý do: JD yêu cầu "ability to read English technical documents"; team ZOZO Nhật/Mỹ/NZ;
+  reports tiếng Anh là bằng chứng trực tiếp cho dòng đó của JD + interview có thể đọc trực tiếp.
+Docs planning (agent/, tasks/, docs/guides) → tiếng Việt (chỉ mình dùng).
+Commit message → tiếng Anh (COMMIT_CONVENTION.md).
 ```
 
 ## D12. Không CI/CD, không unit tests, không branch "fixed"
