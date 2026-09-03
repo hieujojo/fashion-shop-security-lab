@@ -72,7 +72,7 @@ tasks/04 (products)     TẠO: routes/products.ts, pages/Home.tsx, Products.tsx,
 tasks/05 (reviews)      TẠO: routes/reviews.ts, trang ProductDetail.tsx + ReviewList
   └── Cần: 02, 04 — VULN-02 (stored XSS render thô)
 
-tasks/06 (profile)      TẠO: routes/profile.ts, pages/Profile.tsx, csrf-poc.html
+tasks/06 (profile)      TẠO: routes/profile.ts, pages/Profile.tsx, poc/csrf-poc.html
   └── Cần: 03 (auth middleware) — VULN-03 (CSRF đổi email)
 
 tasks/07 (admin)        TẠO: routes/admin.ts, pages/Admin.tsx
@@ -108,7 +108,7 @@ tasks/07 → 08:  NHỎ (08 sửa seed.sql — file của 02 — được phép:
 □ 03 Login OK: alice login được, cookie 'session' xuất hiện; VULN-01a exploit được
 □ 04 Products/search OK: filter category, search q; VULN-01b UNION dump được users
 □ 05 Reviews: post + hiển thị; VULN-02 XSS kích hoạt ở ProductDetail
-□ 06 Profile: đổi email được; VULN-03 csrf-poc.html đổi email khi đang login
+□ 06 Profile: đổi email được; VULN-03 poc/csrf-poc.html đổi email khi đang login
 □ 07 Admin: default creds vào được; XSS bắn alert trong admin panel (F02 chain)
 □ 08 Seed đủ 15 products ảnh SVG; app "nhìn như shop thật"
 ```

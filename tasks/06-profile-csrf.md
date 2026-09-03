@@ -55,7 +55,7 @@ On submit: POST /api/profile/email { newEmail } → cập nhật UI
 Ghi chú: đây là mục tiêu của CSRF — request này KHÔNG có token, KHÔNG check nguồn gốc
 ```
 
-### ✅ csrf-poc.html (ROOT repo — mở bằng browser là demo được)
+### ✅ poc/csrf-poc.html (mở bằng browser là demo được — để root sạch)
 
 ```html
 <!--
@@ -95,7 +95,7 @@ Lưu ý kỹ thuật (giải thích được khi phỏng vấn):
 ## Verify checklist (functional)
 
 ```
-□ Login alice → /profile hiện alice@trendthreads.dev
+□ Login alice → /profile hiện alice@fashionhub.dev
 □ Đổi email → alice@newname.dev → UI cập nhật, GET /api/profile trả email mới
 □ Chưa login mở /profile → 401 JSON (requireAuth hoạt động)
 ```
@@ -103,11 +103,11 @@ Lưu ý kỹ thuật (giải thích được khi phỏng vấn):
 ## Verify checklist (VULN-03 — làm NGAY, kịch bản đầy đủ)
 
 ```
-□ B1: Browser tab 1 → login alice@trendthreads.dev / alice123 (đang ở /profile)
-□ B2: Mở csrf-poc.html (double-click file, hoặc mở từ ổ đĩa — origin file://)
+□ B1: Browser tab 1 → login alice@fashionhub.dev / alice123 (đang ở /profile)
+□ B2: Mở poc/csrf-poc.html (double-click file, hoặc mở từ ổ đĩa — origin file://)
       → trang "Win a FREE Gift Card!" tự submit
 □ B3: Quay lại tab /profile → F5 → email đã thành attacker@evil.com  ← CSRF THÀNH CÔNG
-□ B4: Chứng minh hậu quả: logout → login lại bằng alice@trendthreads.dev → FAIL
+□ B4: Chứng minh hậu quả: logout → login lại bằng alice@fashionhub.dev → FAIL
       (email cũ không còn) — attacker giờ kiểm soát email → có thể "forgot password" (nếu có)
 □ B5: Reset lại email cho alice (để demo lần sau): update qua SQL hoặc login bằng attacker@evil.com
       + đổi ngược lại — ghi lệnh vào tasks/09 runbook
@@ -128,7 +128,7 @@ Commit mẫu (tách 2):
 ## ⚠️ Lưu ý cho task sau (07)
 
 ```
-- csrf-poc.html nằm ở ROOT repo (cạnh README), KHÔNG nằm trong app/
+- csrf-poc.html nằm ở poc/ (KHÔNG nằm trong app/, KHÔNG ở root — giữ root sạch)
 - Nếu demo B2 không chạy → kiểm tra cookie còn đó không + đúng localhost:5173 (rules.md rule 3)
 - Sau khi demo xong nhớ reset email alice (ghi rõ trong tasks/09)
 ```

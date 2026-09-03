@@ -1,4 +1,4 @@
-# TrendThreads — Web Security Testing Lab
+# FashionHub — Web Security Testing Lab
 
 > ⚠️ **CỐ Ý CHỨA LỖ HỔNG BẢO MẬT — CHỈ DÙNG CHO MỤC ĐÍCH HỌC TẬP. TUYỆT ĐỐI KHÔNG DEPLOY.**
 > Repo này chứa một ứng dụng web **cố tình** cài các lỗ hổng bảo mật để luyện tập kiểm thử.
@@ -21,7 +21,7 @@ trong thư mục `findings/` (đang hoàn thiện ở Phase 4).
 | Phase | Nội dung | Trạng thái |
 |---|---|---|
 | 0 | Lập kế hoạch chi tiết (agent/ + tasks/ + docs/) | ✅ Hoàn thành |
-| 1 | Xây dựng app TrendThreads + 4 lỗ hổng cố ý | ⬜ Tiếp theo |
+| 1 | Xây dựng app FashionHub + 4 lỗ hổng cố ý | ⬜ Tiếp theo |
 | 2 | Khai thác thủ công từng lỗ hổng (browser/Postman/Burp) | ⬜ |
 | 3 | Quét bằng OWASP ZAP + phân loại alerts | ⬜ |
 | 4 | Viết findings reports + tài liệu | ⬜ |
@@ -32,14 +32,14 @@ Công cụ sử dụng: **OWASP ZAP** · **Burp Suite** · **Postman** · **Chro
 ## Cấu trúc project
 
 ```
-security-lab-plan.md  # Plan tổng quan cấp cao (mục đích apply + timeline)
+README.md             # File này — giới thiệu project
 agent/                # Tài liệu quy trình phát triển (đọc agent/WORKFLOW.md trước)
 tasks/                # Kế hoạch từng bước nhỏ + runbook khai thác (00-12)
-docs/                 # Hướng dẫn (setup, rules, decisions) + reference
+docs/                 # security-lab-plan.md (plan tổng quan) + guides/ + reference/
 app/                  # Mã nguồn (React client + Express server + PostgreSQL) — Phase 1
 findings/             # Báo cáo lỗ hổng — Phase 4
 screenshots/          # Bằng chứng — Phase 2-3
-csrf-poc.html         # File PoC CSRF — mở bằng browser là demo được
+poc/                  # File PoC (csrf-poc.html) — tạo ở tasks/06
 ```
 
 ## Giấy phép

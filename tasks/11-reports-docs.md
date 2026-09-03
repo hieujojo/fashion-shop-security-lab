@@ -1,6 +1,6 @@
 # Tasks 11: Reports + Docs (findings tiếng Anh) + README (tiếng Việt)
 
-> Phase 4 · Người làm: AI draft → **chủ nhân đọc, hiểu, sửa bằng lời của mình** (bắt buộc).
+> Phase 4 · Người làm: AI draft → **bạn đọc, hiểu, sửa bằng lời của mình** (bắt buộc).
 > Mục tiêu: bộ deliverables public trông như security engineer thật viết.
 > Ngôn ngữ (D11 — cập nhật 2026-09-03): README.md → TIẾNG VIỆT · findings/*.md +
 > docs/OWASP-checklist.md + docs/tool-guide.md → TIẾNG ANH.
@@ -75,7 +75,7 @@ Code đúng ở chỗ khác (vd middleware dùng $1) → đối chiếu "đúng 
 Ghi chú: project cố ý giữ code lỗi để làm lab — bản After là hướng dẫn sửa cho dev.
 ```
 
-> Chủ nhân: đọc từng report, tự viết lại mục 4 + 5 + 7 bằng lời của mình.
+> Bạn: đọc từng report, tự viết lại mục 4 + 5 + 7 bằng lời của mình.
 > Nếu không giải thích được 1 mục → quay lại tasks/09 làm lại phần đó. KHÔNG đi tiếp.
 
 ---
@@ -162,7 +162,7 @@ documents, checklists" trong JD.
 ```
 1. Banner to: ⚠️ DELIBERATELY VULNERABLE — EDUCATIONAL PURPOSES ONLY. DO NOT DEPLOY.
    + giải thích: data 100% synthetic, chạy local, ai clone về tự chịu trách nhiệm (ethics!)
-2. What is TrendThreads: 1-2 câu + screenshot app chạy bình thường
+2. What is FashionHub: 1-2 câu + screenshot app chạy bình thường
 3. Quickstart: docker compose up -d && npm install && npm run db:setup && npm run dev
 4. Demo accounts (credentials bảng)
 5. Vulnerabilities: bảng 4 findings + severity + link findings/*.md
@@ -178,7 +178,7 @@ Không badge CI/CD (không có), không thổi phồng số liệu (rules.md rul
 
 ```
 □ 4 findings + index: đủ 8 mục, tiếng Anh, payload copy được, ảnh evidence đúng tên
-□ Chủ nhân ĐÃ đọc + tự viết lại 4 mục (4/5/7) mỗi report — không phải bản AI nguyên si
+□ Bạn ĐÃ đọc + tự viết lại 4 mục (4/5/7) mỗi report — không phải bản AI nguyên si
 □ OWASP-checklist.md + tool-guide.md xong (tiếng Anh) + README.md xong (tiếng Việt)
 □ Đọc lại 1 lần như người lạ: có chỗ nào "không hiểu" → sửa tới khi mạch lạc
 □ Tick PROGRESS.md Phase 4

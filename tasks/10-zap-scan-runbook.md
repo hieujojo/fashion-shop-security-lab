@@ -1,6 +1,6 @@
 # Tasks 10: RUNBOOK Phase 3 — OWASP ZAP (tool chính)
 
-> **Người làm: CHỦ NHÂN** (AI hướng dẫn). Mục tiêu: ZAP spider + scan → screenshot alerts → triage ~15-20 alerts → nối với 4 findings.
+> **Người làm: BẠN** (AI hướng dẫn). Mục tiêu: ZAP spider + scan → screenshot alerts → triage ~15-20 alerts → nối với 4 findings.
 > Thời lượng: 1 ngày.
 
 ---
@@ -108,7 +108,7 @@ KHÔNG thấy SQLi alert ở login? → Đúng vậy: ZAP không tự login → 
 □ Bảng triage hoàn chỉnh (số alert thật, verdict từng cái, lý do FP)
 □ Kể lại được: ZAP báo gì, cái nào thật cái nào FP, cái nào ZAP KHÔNG bắt được và vì sao
 □ Tick PROGRESS.md: hàng "ZAP alerts + triage"
-□ Ghi HANDOVER.md → Phase 4 (tasks/11 — AI viết reports, chủ nhân review)
+□ Ghi HANDOVER.md → Phase 4 (tasks/11 — AI viết reports, bạn review)
 ```
 
 ---

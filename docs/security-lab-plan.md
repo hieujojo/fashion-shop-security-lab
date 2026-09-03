@@ -28,7 +28,7 @@
 | Tool chính | **OWASP ZAP** (spider + active + passive scan) | Burp Suite Community + Postman phụ trợ verify |
 | Verification | 100% GUI (browser, Postman, Burp, ZAP). **KHÔNG bash/Linux CLI scripts** | |
 | Git | **1 branch duy nhất**. Remediation = code trước/sau ngay trong report | Không CI/CD, không unit tests |
-| Tên app | **TrendThreads** | Fashion e-commerce (ám chỉ ZOZOTOWN của ZOZO) |
+| Tên app | **FashionHub** | Fashion e-commerce — tên đơn giản, dễ demo |
 | Tên repo (đề xuất) | `fashion-shop-security-lab` | GitHub, public |
 
 **Chạy app:** `docker compose up -d` + `npm install` + `npm run db:setup` + `npm run dev` → `http://localhost:3000`
@@ -64,14 +64,14 @@ fashion-shop-security-lab/
 ├── docs/
 │   ├── OWASP-checklist.md       # 1 trang, dạng checkbox
 │   └── tool-guide.md            # ZAP/Burp/Postman: dùng gì cho finding nào
-├── csrf-poc.html                # File mở bằng browser là demo được
+├── poc/csrf-poc.html            # File mở bằng browser là demo được (để root sạch)
 ├── screenshots/                 # Evidence 4 findings + ZAP alerts
 └── README.md                    # Banner "deliberately vulnerable" + quickstart + bảng findings
 ```
 
 ---
 
-## 3. App — TrendThreads (vỏ real, ruột mỏng)
+## 3. App — FashionHub (vỏ real, ruột mỏng)
 
 **Luật:** mỗi tính năng giữ lại phải (a) làm demo trông thật, (b) chứa lỗ hổng, hoặc (c) cần cho flow dẫn tới lỗ hổng. Không có lý do → cắt.
 
@@ -91,7 +91,7 @@ Cart, Checkout, Orders, Register page, payment, SMTP thật, wishlist, admin CRU
 ### Seed data (tự tạo 100%, không lấy từ đâu)
 | Loại | Chi tiết |
 |---|---|
-| Users (3) | `admin@trendthreads.dev / admin123` (yếu — cố ý) · `alice@…` · `mallory@…` — README ghi sẵn credentials |
+| Users (3) | `admin@fashionhub.dev / admin123` (yếu — cố ý) · `alice@…` · `mallory@…` — README ghi sẵn credentials |
 | Products (~15) | Tên/giá/mô tả tự viết: "Slim-fit Denim Jacket $89", "Cashmere Crewneck $120"… |
 | Ảnh | SVG placeholder tự render (màu nền + tên sản phẩm) — chạy offline, 0 dependency |
 | Reviews (~5) | Text mẫu tự viết |
@@ -102,7 +102,7 @@ Cart, Checkout, Orders, Register page, payment, SMTP thật, wishlist, admin CRU
 
 ### Finding 01 — SQL Injection (Critical) · OWASP A03:2021 / CWE-89
 **2 entry point:**
-- `POST /login` — **auth bypass**: `email=admin@trendthreads.dev'--` + password bất kỳ → query thành `WHERE email='admin@…'--' AND password='…'` → đăng nhập admin
+- `POST /login` — **auth bypass**: `email=admin@fashionhub.dev'--` + password bất kỳ → query thành `WHERE email='admin@…'--' AND password='…'` → đăng nhập admin
 - `GET /api/products?q=` — **UNION data exfiltration**: `q=' UNION SELECT id, email, password, role FROM users--` (đếm đúng số cột) → dump bảng users
 
 **Code lỗi:** nối chuỗi SQL trực tiếp (không dùng parameterized query) ở cả login lẫn search.
@@ -169,18 +169,18 @@ Các mục con (viết trong 1 report):
 | Phase | Việc | Ai làm | Ngày |
 |---|---|---|---|
 | 1 | Code app + 4 vulns + seed, chạy được | AI khác | 2-3 |
-| 2 | Chủ nhân tự khai thác từng vuln (browser/Postman/Burp) + chụp screenshot | **Chủ nhân** (AI hướng dẫn từng bước) | 2 |
-| 3 | Chạy ZAP scan → screenshot alerts → triage ~20 → 4 | Chủ nhân | 1 |
-| 4 | AI draft 4 reports + OWASP checklist + README → chủ nhân đọc, hiểu, sửa bằng lời của mình | Cả hai | 1-2 |
+| 2 | Bạn tự khai thác từng vuln (browser/Postman/Burp) + chụp screenshot | **Bạn** (AI hướng dẫn từng bước) | 2 |
+| 3 | Chạy ZAP scan → screenshot alerts → triage ~20 → 4 | Bạn | 1 |
+| 4 | AI draft 4 reports + OWASP checklist + README → bạn đọc, hiểu, sửa bằng lời của mình | Cả hai | 1-2 |
 | 5 | Push GitHub + kiểm tra link | AI khác | 0.5 |
 
-**Nguyên tắc bất di bất dịch:** không code, nhưng **tự tay khai thác + giải thích được cả 4 vuln** — vì vòng technical interview sẽ hỏi đúng những thứ này. AI làm file, chủ nhân làm hiểu.
+**Nguyên tắc bất di bất dịch:** không code, nhưng **tự tay khai thác + giải thích được cả 4 vuln** — vì vòng technical interview sẽ hỏi đúng những thứ này. AI làm file, bạn làm hiểu.
 
 ---
 
 ## 8. Deliverables cuối (checklist hoàn thành)
 
-- [ ] App TrendThreads chạy local (React+TS+Tailwind / Node+TS / PostgreSQL Docker), 4 vuln tái hiện được
+- [ ] App FashionHub chạy local (React+TS+Tailwind / Node+TS / PostgreSQL Docker), 4 vuln tái hiện được
 - [ ] `findings/` — 4 reports + index
 - [ ] `docs/OWASP-checklist.md` (1 trang checkbox) + `docs/tool-guide.md`
 - [ ] `csrf-poc.html` — mở browser là demo được
@@ -192,7 +192,7 @@ Các mục con (viết trong 1 report):
 
 ## 9. CV bullets (sẽ dùng cho Bespokify)
 
-> **Security Testing Lab — TrendThreads** *(React + Node.js/Express + PostgreSQL)*
+> **Security Testing Lab — FashionHub** *(React + Node.js/Express + PostgreSQL)*
 > - Built a deliberately vulnerable fashion e-commerce web app to practice security testing
 > - Identified and manually verified 4 OWASP Top 10 vulnerabilities (SQL Injection, Stored XSS, CSRF, security misconfiguration) using **OWASP ZAP, Burp Suite, and Postman** — triaged 20+ scanner alerts down to confirmed findings
 > - Wrote findings reports with reproduction steps and remediation (before/after code)
@@ -204,7 +204,7 @@ Các mục con (viết trong 1 report):
 - ❌ Không fork DVWA / OWASP Juice Shop / bất kỳ lab có sẵn
 - ❌ Không claim "penetration testing" trên hệ thống thật / ngoài phạm vi lab
 - ❌ Không CI/CD, không unit tests, không docs PUBLIC đồ sộ (README/findings giữ gọn tiếng Anh)
-- ✅ NHƯNG có bộ plan nội bộ agent/ + tasks/ chi tiết từng bước (bắt chước distributed-cache — phục vụ AI + chủ nhân thi công, không phải docs public)
+- ✅ NHƯNG có bộ plan nội bộ agent/ + tasks/ chi tiết từng bước (bắt chước distributed-cache — phục vụ AI + bạn thi công, không phải docs public)
 - ❌ Không bash/Linux CLI scripts (verify bằng GUI)
 - ❌ Không 2 git branch, không ghi commit counts
 - ❌ Không Supabase, không cart/checkout/register/payment/SMTP

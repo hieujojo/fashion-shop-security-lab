@@ -52,7 +52,7 @@ router.post('/login', async (req, res) => {
 
   // VULN-01a: deliberately insecure — SQL string concatenation (auth bypass)
   // See tasks/03 + docs/guides/decisions.md (D-notes). DO NOT "fix" — this is the vulnerability.
-  // Payload: email = admin@trendthreads.dev'--  → comment hết phần password check
+  // Payload: email = admin@fashionhub.dev'--  → comment hết phần password check
   const sql = `SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`;
   const { rows } = await pool.query(sql);   // KHÔNG try/catch → verbose error (F04-3, D6)
 
@@ -105,7 +105,7 @@ export async function api<T>(path: string, options: RequestInit = {}): Promise<T
 UI: form email + password + nút "Sign in" (Tailwind)
 On submit: POST /api/login → thành công: lưu user vào state (App) + navigate '/'
           → thất bại: hiện error message từ server
-Ghi chú demo: dưới form ghi nhỏ "Demo accounts: admin@trendthreads.dev / admin123"
+Ghi chú demo: dưới form ghi nhỏ "Demo accounts: admin@fashionhub.dev / admin123"
   (giống shop thật có "use demo account" — cũng là hint cho default creds finding)
 ```
 
@@ -122,7 +122,7 @@ app.use('/api', authRouter);   // + các router task sau
 ## Verify checklist (functional)
 
 ```
-□ http://localhost:5173/login → login bằng alice@trendthreads.dev / alice123 → vào được Home
+□ http://localhost:5173/login → login bằng alice@fashionhub.dev / alice123 → vào được Home
 □ DevTools → Application → Cookies → localhost: cookie 'session' tồn tại:
      HttpOnly = KHÔNG tick · SameSite = None · Secure = tick
 □ Console gõ document.cookie → hiện "session=2" (chứng minh JS đọc được — nền cho F02)
@@ -134,10 +134,10 @@ app.use('/api', authRouter);   // + các router task sau
 
 ```
 □ Postman: POST http://localhost:5173/api/login
-     Body JSON: { "email": "admin@trendthreads.dev'--", "password": "anything" }
-   → 200 + trả về { id:1, email:"admin@trendthreads.dev", role:"admin" }  ← BYPASS THÀNH CÔNG
+     Body JSON: { "email": "admin@fashionhub.dev'--", "password": "anything" }
+   → 200 + trả về { id:1, email:"admin@fashionhub.dev", role:"admin" }  ← BYPASS THÀNH CÔNG
 □ Giải thích (phải hiểu): query thành
-     SELECT * FROM users WHERE email='admin@trendthreads.dev'--' AND password='anything'
+     SELECT * FROM users WHERE email='admin@fashionhub.dev'--' AND password='anything'
    → '--' comment hết phần password check (PostgreSQL: -- comment tới cuối dòng, không cần space)
 ```
 

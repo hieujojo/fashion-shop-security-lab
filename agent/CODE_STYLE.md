@@ -7,7 +7,7 @@
 ```
 Code, comment, commit: TIẾNG ANH
 Docs planning (agent/, tasks/, docs/guides): tiếng Việt
-README.md → tiếng Việt (chủ nhân chốt 2026-09-03 — xem decisions.md D11)
+README.md → tiếng Việt (bạn chốt 2026-09-03 — xem decisions.md D11)
 findings/, docs/OWASP-checklist.md, docs/tool-guide.md → TIẾNG ANH
 ```
 

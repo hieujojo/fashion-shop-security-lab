@@ -21,7 +21,7 @@ QUY TẮC: KHÔNG đổi logic vuln — chỉ làm đẹp UI + data.
 Router: / (Home), /products (Products), /products/:id (ProductDetail),
         /login (Login), /profile (Profile), /admin (Admin)
 User state: sau login/logout cập nhật → Navbar hiện email + link (Login/Profile/Admin/Logout)
-Navbar: tên shop "TrendThreads" + nav links (giống shop thật — ZOZOTOWN vibe)
+Navbar: tên shop "FashionHub" + nav links (giống shop thật)
 ```
 
 ### ✅ Ảnh SVG placeholder (app/client/public/img/products/1.svg … 15.svg)
@@ -39,7 +39,7 @@ Ghi chú: tạo 1 script nhỏ sinh 15 file (scripts/gen-svgs.mjs) HOẶC viết
 
 ```
 - Đảm bảo 15 products với mô tả 1 câu thật (đã có ở tasks/02 — giữ nguyên)
-- 5 reviews seed (đã có) — giữ BENIGN (payload độc để CHỦ NHÂN tự post ở Phase 2)
+- 5 reviews seed (đã có) — giữ BENIGN (payload độc để BẠN tự post ở Phase 2)
 - Re-run: npm run db:setup → đếm lại 3/15/5
 ```
 
@@ -73,7 +73,7 @@ Ghi chú: tạo 1 script nhỏ sinh 15 file (scripts/gen-svgs.mjs) HOẶC viết
 ## Verify checklist (4 vuln CÒN NGUYÊN — chạy nhanh từng cái)
 
 ```
-□ F01a: POST /api/login {email:"admin@trendthreads.dev'--", password:"x"} → 200 admin
+□ F01a: POST /api/login {email:"admin@fashionhub.dev'--", password:"x"} → 200 admin
 □ F01b: GET /api/products?q=' UNION SELECT NULL,email,password,NULL,role,email FROM users-- → dump users
 □ F02:  review <img src=x onerror="alert(document.cookie)> → alert bắn ở ProductDetail VÀ Admin
 □ F03:  csrf-poc.html đổi email khi đang login
@@ -96,6 +96,6 @@ Commit mẫu:
 
 ```
 □ Tick toàn bộ ✅ trong PROGRESS.md (Phase 1 + cột "Code xong" của 4 findings)
-□ Ghi HANDOVER.md → Phase 2 bắt đầu (tasks/09 — CHỦ NHÂN làm)
-□ Thông báo cho chủ nhân: app sẵn sàng để TỰ TAY khai thác
+□ Ghi HANDOVER.md → Phase 2 bắt đầu (tasks/09 — BẠN làm)
+□ Thông báo cho bạn: app sẵn sàng để TỰ TAY khai thác
 ```

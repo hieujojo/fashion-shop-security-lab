@@ -21,24 +21,24 @@ Xem danh sách chính xác ở tasks/00-overview.md
 services:
   db:
     image: postgres:16-alpine
-    container_name: trendthreads-db
+    container_name: fashionhub-db
     environment:
-      POSTGRES_USER: trendthreads
-      POSTGRES_PASSWORD: trendthreads
-      POSTGRES_DB: trendthreads
+      POSTGRES_USER: fashionhub
+      POSTGRES_PASSWORD: fashionhub
+      POSTGRES_DB: fashionhub
     ports:
       - "5432:5432"        # bận → đổi "5433:5432" + env DB_PORT (xem docs/guides/setup.md)
     volumes:
-      - trendthreads-data:/var/lib/postgresql/data
+      - fashionhub-data:/var/lib/postgresql/data
 volumes:
-  trendthreads-data:
+  fashionhub-data:
 ```
 
 ### ✅ app/package.json (root workspace)
 
 ```json
 {
-  "name": "trendthreads-app",
+  "name": "fashionhub-app",
   "private": true,
   "scripts": {
     "dev": "concurrently -n server,client -c blue,green \"npm run dev -w server\" \"npm run dev -w client\"",

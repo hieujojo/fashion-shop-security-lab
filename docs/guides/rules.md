@@ -26,7 +26,7 @@ Cookie Secure + same-site + secure-context chỉ đúng với localhost.
 Dùng 127.0.0.1 → cookie không lưu → CSRF/XSS demo chết (mất cả buổi debug).
 ```
 
-## 4. Phase 2–3: chủ nhân TỰ TAY khai thác
+## 4. Phase 2–3: bạn TỰ TAY khai thác
 
 ```
 AI KHÔNG được làm thay việc bấm payload/chụp screenshot/chạy ZAP.

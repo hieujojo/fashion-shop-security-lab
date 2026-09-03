@@ -11,7 +11,7 @@ Trạng thái: Phase 0 (lập plan chi tiết) HOÀN THÀNH
 Bắt đầu: 2026-09-03
 Cập nhật: 2026-09-03
 Target: 4 findings exploit được + reports + README + GitHub public
-Nguyên tắc: chủ nhân TỰ TAY khai thác Phase 2-3 (AI không làm thay)
+Nguyên tắc: bạn TỰ TAY khai thác Phase 2-3 (AI không làm thay)
 ```
 
 ---
@@ -37,21 +37,21 @@ Người làm: AI
 
 ```
 Trạng thái: CHƯA BẮT ĐẦU
-Người làm: CHỦ NHÂN (AI hướng dẫn) — không code, chỉ khai thác + chụp screenshot
+Người làm: BẠN (AI hướng dẫn) — không code, chỉ khai thác + chụp screenshot
 ```
 
 ### Phase 3: OWASP ZAP ⬜ (tasks/10)
 
 ```
 Trạng thái: CHƯA BẮT ĐẦU
-Người làm: CHỦ NHÂN
+Người làm: BẠN
 ```
 
 ### Phase 4: Reports + docs (English) ⬜ (tasks/11)
 
 ```
 Trạng thái: CHƯA BẮT ĐẦU
-Người làm: AI draft → chủ nhân đọc + sửa bằng lời của mình
+Người làm: AI draft → bạn đọc + sửa bằng lời của mình
 ```
 
 ### Phase 5: Publish ⬜ (tasks/12)

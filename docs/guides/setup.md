@@ -1,4 +1,4 @@
-# SETUP — Cài đặt & chạy app (TrendThreads)
+# SETUP — Cài đặt & chạy app (FashionHub)
 
 > Máy dev hiện tại: Node v20.20.2, npm 10.8.2, Docker 29 + Compose v5, Git 2.49 (Windows).
 
@@ -26,7 +26,7 @@ docker compose -f app/docker-compose.yml up -d     # PostgreSQL 16 trên port 54
 cd app && npm install          # root workspace (server + client)
 
 # 3. Tạo DB + seed data
-npm run db:setup               # tạo database trendthreads + chạy schema.sql + seed.sql
+npm run db:setup               # tạo database fashionhub + chạy schema.sql + seed.sql
 
 # 4. Chạy app
 npm run dev                    # server :3000 + client :5173 (concurrently)
@@ -50,9 +50,9 @@ npm run dev                    # server :3000 + client :5173 (concurrently)
 ## Credentials (seed — CỐ Ý yếu, ghi trong README)
 
 ```
-admin@trendthreads.dev  / admin123     (role: admin)
-alice@trendthreads.dev  / alice123     (role: customer)
-mallory@trendthreads.dev / mallory123  (role: customer)
+admin@fashionhub.dev  / admin123     (role: admin)
+alice@fashionhub.dev  / alice123     (role: customer)
+mallory@fashionhub.dev / mallory123  (role: customer)
 ```
 
 ---
@@ -106,7 +106,7 @@ fashion-shop-security-lab/
 │   ├── sql/        # schema.sql + seed.sql
 │   ├── docker-compose.yml
 │   └── package.json (workspace: chạy cả server + client)
-├── csrf-poc.html
+├── poc/csrf-poc.html
 ├── findings/       # (tạo ở tasks/11)
 ├── screenshots/    # (tạo ở tasks/09-10)
 └── README.md       # (tạo ở tasks/11 — tiếng Anh)

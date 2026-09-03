@@ -49,7 +49,7 @@
 vuln(auth): add SQL injection in login query (deliberate — F01a)
 
 - Concatenate email directly into SQL string instead of parameterized query
-- Payload: admin@trendthreads.dev'-- logs in as admin without password
+- Payload: admin@fashionhub.dev'-- logs in as admin without password
 - Deliberately insecure: see tasks/03 + docs/guides/decisions.md
 
 feat(products): add search + category filter pages (home/products)

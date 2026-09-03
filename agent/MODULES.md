@@ -23,7 +23,7 @@
 Entry point 1: POST /api/login        → auth bypass (đăng nhập admin không cần password)
   File: app/server/src/routes/auth.ts
   Lỗi: nối chuỗi email vào SQL: WHERE email = '${email}' AND password = '${password}'
-  Payload: email = admin@trendthreads.dev'--   (password bất kỳ)
+  Payload: email = admin@fashionhub.dev'--   (password bất kỳ)
   Kết quả: WHERE email='admin@…'--' AND password='x'  → comment hết phần sau → login admin
 
 Entry point 2: GET /api/products?q=   → UNION dump bảng users
@@ -52,7 +52,7 @@ Entry point: POST /api/products/:id/reviews → render review
 ```
 Entry point: POST /api/profile/email   (auth bằng cookie, KHÔNG có CSRF token)
   File: app/server/src/routes/profile.ts
-  File: csrf-poc.html (ở root repo) — form tự submit, mở bằng browser là chạy
+  File: poc/csrf-poc.html — form tự submit, mở bằng browser là chạy
   Điều kiện tiên quyết: cookie SameSite=None; Secure (F04-5) → browser gửi kèm cross-site
   Kịch bản: alice đang đăng nhập → mở csrf-poc.html → email bị đổi → 
     attacker đổi password / dùng forgot-password (nếu có) → chiếm tài khoản
@@ -60,7 +60,7 @@ Entry point: POST /api/profile/email   (auth bằng cookie, KHÔNG có CSRF toke
 
 ### F04 — Misconfig + Broken Auth (High — gộp 7 mục con, 1 report)
 ```
-F04-1 Default credentials: admin@trendthreads.dev / admin123  (seed, README ghi rõ)
+F04-1 Default credentials: admin@fashionhub.dev / admin123  (seed, README ghi rõ)
 F04-2 No rate limit / lockout: POST /api/login không giới hạn → brute-force được (Burp Intruder)
 F04-3 Verbose error: lỗi SQL trả nguyên query + stack trace ra response
        (server KHÔNG có error handler gọn — Express dev mode)
@@ -81,7 +81,7 @@ tasks/02 (db)           TẠO: sql/schema.sql, sql/seed.sql, db.ts, npm scripts 
 tasks/03 (auth)         TẠO: routes/auth.ts, middleware, Login page                 [cần 02]
 tasks/04 (products)     TẠO: routes/products.ts, Home/Products pages                [cần 02]
 tasks/05 (reviews)      TẠO: routes/reviews.ts, ProductDetail page                  [cần 02,04]
-tasks/06 (profile)      TẠO: routes/profile.ts, Profile page, csrf-poc.html         [cần 03]
+tasks/06 (profile)      TẠO: routes/profile.ts, Profile page, poc/csrf-poc.html      [cần 03]
 tasks/07 (admin)        TẠO: routes/admin.ts, Admin page (đọc F04)                  [cần 03,05]
 tasks/08 (polish)       SỬA nhỏ: seed 15 products, SVG placeholder, README nội bộ   [cần 02]
 → KHÔNG task nào sửa file của task khác (trừ 08 polish cuối — được phép vì là phase cuối build)

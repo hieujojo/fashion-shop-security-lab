@@ -51,9 +51,9 @@ CREATE TABLE reviews (
 ```sql
 -- users (3) — password PLAINTEXT cố ý (D5), README sẽ ghi credentials
 INSERT INTO users (email, password, role) VALUES
-  ('admin@trendthreads.dev',   'admin123',   'admin'),
-  ('alice@trendthreads.dev',   'alice123',   'customer'),
-  ('mallory@trendthreads.dev', 'mallory123', 'customer');
+  ('admin@fashionhub.dev',   'admin123',   'admin'),
+  ('alice@fashionhub.dev',   'alice123',   'customer'),
+  ('mallory@fashionhub.dev', 'mallory123', 'customer');
 
 -- products (~15) — danh sách gợi ý (task 08 bổ sung cho đủ + mô tả + ảnh SVG)
 INSERT INTO products (name, description, price_cents, category, image_url) VALUES
@@ -86,20 +86,20 @@ INSERT INTO reviews (product_id, author, content, rating) VALUES
 
 ```typescript
 import { Pool } from 'pg';
-// Đọc env: DB_HOST=localhost, DB_PORT=5432, DB_USER/PASS/NAME=trendthreads
+// Đọc env: DB_HOST=localhost, DB_PORT=5432, DB_USER/PASS/NAME=fashionhub
 export const pool = new Pool({
   host: process.env.DB_HOST || 'localhost',
   port: Number(process.env.DB_PORT || 5432),
-  user: process.env.DB_USER || 'trendthreads',
-  password: process.env.DB_PASS || 'trendthreads',
-  database: process.env.DB_NAME || 'trendthreads',
+  user: process.env.DB_USER || 'fashionhub',
+  password: process.env.DB_PASS || 'fashionhub',
+  database: process.env.DB_NAME || 'fashionhub',
 });
 ```
 
 ### ✅ app/server/scripts/db-setup.ts
 
 ```
-1. Kết nối tới postgres (db mặc định 'postgres') → CREATE DATABASE trendthreads (nếu chưa có)
+1. Kết nối tới postgres (db mặc định 'postgres') → CREATE DATABASE fashionhub (nếu chưa có)
 2. Đọc app/sql/schema.sql + app/sql/seed.sql → chạy tuần tự
 3. Log số rows insert được
 → Script idempotent: chạy lại = DROP + CREATE lại (data lab, không sợ mất)

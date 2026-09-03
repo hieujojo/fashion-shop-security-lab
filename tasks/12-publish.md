@@ -22,7 +22,7 @@
 ```
 Bước 1: git init (nếu chưa) + commit theo GIT_WORKFLOW (đã commit dần từ Phase 1)
 Bước 2: GitHub → New repository → tên: fashion-shop-security-lab → Public
-        Mô tả: "Deliberately vulnerable fashion e-commerce app (TrendThreads) — web security
+        Mô tả: "Deliberately vulnerable fashion e-commerce app (FashionHub) — web security
         testing lab: SQLi, stored XSS, CSRF, misconfiguration. Educational only. Built with
         React + Node/Express + PostgreSQL."
         KHÔNG tick README/LICENSE (đã có sẵn trong repo)
@@ -54,7 +54,7 @@ Bước 3: git remote add origin https://github.com/<user>/fashion-shop-security
 ## Checklist hoàn thành (toàn project — đối chiếu deliverable plan gốc)
 
 ```
-□ App TrendThreads chạy local, 4 vuln tái hiện được
+□ App FashionHub chạy local, 4 vuln tái hiện được
 □ findings/ — 4 reports + index (tiếng Anh) · README (tiếng Việt)
 □ docs/OWASP-checklist.md + docs/tool-guide.md
 □ csrf-poc.html

@@ -1,4 +1,4 @@
-# WORKFLOW — Quy trình làm việc (TrendThreads Security Lab)
+# WORKFLOW — Quy trình làm việc (FashionHub Security Lab)
 
 > File tổng hợp toàn bộ quy trình. **Đọc file này trước khi bắt đầu bất kỳ việc gì.**
 > Project mô phỏng cách tổ chức của `distributed-cache` (agent/ + tasks/ + docs/guides).
@@ -34,10 +34,10 @@
 | Phase | Nội dung | tasks/ | Ai làm | Ngày |
 |---|---|---|---|---|
 | 0 | Lập plan chi tiết (file này) | — | AI | xong |
-| 1 | Code app TrendThreads + 4 vulns + seed | tasks/01 → 08 | AI (Buffy) | 2-3 |
-| 2 | Chủ nhân TỰ TAY khai thác từng vuln + screenshot | tasks/09 | **Chủ nhân** (AI hướng dẫn từng bước) | 2 |
-| 3 | Chạy OWASP ZAP → screenshot alerts → triage | tasks/10 | Chủ nhân | 1 |
-| 4 | Viết 4 findings reports + docs + README (tiếng Anh) | tasks/11 | AI draft → chủ nhân sửa bằng lời mình | 1-2 |
+| 1 | Code app FashionHub + 4 vulns + seed | tasks/01 → 08 | AI (Buffy) | 2-3 |
+| 2 | Bạn TỰ TAY khai thác từng vuln + screenshot | tasks/09 | **Bạn** (AI hướng dẫn từng bước) | 2 |
+| 3 | Chạy OWASP ZAP → screenshot alerts → triage | tasks/10 | Bạn | 1 |
+| 4 | Viết 4 findings reports + docs + README (tiếng Anh) | tasks/11 | AI draft → bạn sửa bằng lời mình | 1-2 |
 | 5 | Push GitHub + kiểm tra link | tasks/12 | AI | 0.5 |
 
 ---
@@ -79,16 +79,16 @@ BƯỚC 7: Kết thúc session
 
 ---
 
-## Quy trình Phase 2–3 (Chủ nhân khai thác — AI chỉ hướng dẫn)
+## Quy trình Phase 2–3 (Bạn khai thác — AI chỉ hướng dẫn)
 
 ```
-NGUYÊN TẮC BẤT DI BẤT DỊCH: chủ nhân TỰ TAY làm, TỰ giải thích được.
+NGUYÊN TẮC BẤT DI BẤT DỊCH: bạn TỰ TAY làm, TỰ giải thích được.
 AI KHÔNG được làm thay. AI chỉ:
   □ Chỉ dẫn từng bước trong tasks/09, tasks/10
-  □ Giải thích "vì sao" khi chủ nhân hỏi
-  □ Review screenshot/evidence chủ nhân chụp
+  □ Giải thích "vì sao" khi bạn hỏi
+  □ Review screenshot/evidence bạn chụp
 
-Khi chủ nhân xong 1 vuln → tick ✅ + ghi chú "hiểu và giải thích được" 
+Khi bạn xong 1 vuln → tick ✅ + ghi chú "hiểu và giải thích được" 
   (interview sẽ hỏi ĐÚNG những thứ này)
 ```
 

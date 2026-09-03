@@ -106,7 +106,7 @@ Admin page hiển thị reviews MỚI NHẤT và render HTML thô → nơi F02 k
 ## D11. Ngôn ngữ tài liệu (CẬP NHẬT 2026-09-03)
 
 ```
-README.md → TIẾNG VIỆT (chủ nhân chốt — repo giới thiệu cho người Việt đọc trước)
+README.md → TIẾNG VIỆT (bạn chốt — repo giới thiệu cho người Việt đọc trước)
 findings/*.md, docs/OWASP-checklist.md, docs/tool-guide.md → TIẾNG ANH (giữ nguyên)
   Lý do: JD yêu cầu "ability to read English technical documents"; team ZOZO Nhật/Mỹ/NZ;
   reports tiếng Anh là bằng chứng trực tiếp cho dòng đó của JD + interview có thể đọc trực tiếp.
