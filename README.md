@@ -35,7 +35,8 @@ Công cụ sử dụng: **OWASP ZAP** · **Burp Suite** · **Postman** · **Chro
 README.md             # File này — giới thiệu project
 agent/                # Tài liệu quy trình phát triển (đọc agent/WORKFLOW.md trước)
 tasks/                # Kế hoạch từng bước nhỏ + runbook khai thác (00-12)
-docs/                 # security-lab-plan.md (plan tổng quan) + guides/ + reference/
+docs/                 # security-lab-plan.md + architecture/ (kiến trúc, tech-stack)
+                      # + concepts/ (khái niệm security) + guides/ + reference/
 app/                  # Mã nguồn (React client + Express server + PostgreSQL) — Phase 1
 findings/             # Báo cáo lỗ hổng — Phase 4
 screenshots/          # Bằng chứng — Phase 2-3

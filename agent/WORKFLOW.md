@@ -124,4 +124,7 @@ Khi bạn xong 1 vuln → tick ✅ + ghi chú "hiểu và giải thích được
 | docs/guides/setup.md | Cài đặt + chạy app |
 | docs/guides/rules.md | Quy tắc bắt buộc + lessons learned |
 | docs/guides/decisions.md | Các quyết định đã chốt (KHÔNG tự đổi) |
+| docs/architecture/architecture.md | Kiến trúc các lớp + trust boundaries + bản đồ vuln |
+| docs/architecture/tech-stack.md | Lý do chọn từng công nghệ + alternatives |
+| docs/concepts/*.md | Khái niệm nền (cookie/session, SOP-CSRF-XSS, OWASP, quy trình test) — đọc để HIỂU + phỏng vấn |
 | docs/reference/changelog.md | Bug log |
