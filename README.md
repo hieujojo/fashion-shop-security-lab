@@ -32,13 +32,14 @@ Công cụ sử dụng: **OWASP ZAP** · **Burp Suite** · **Postman** · **Chro
 ## Cấu trúc project
 
 ```
-agent/         # Tài liệu quy trình phát triển (đọc agent/WORKFLOW.md trước)
-tasks/         # Kế hoạch từng bước nhỏ + runbook khai thác (00-12)
-docs/          # Hướng dẫn (setup, rules, decisions) + reference
-app/           # Mã nguồn (React client + Express server + PostgreSQL) — Phase 1
-findings/      # Báo cáo lỗ hổng — Phase 4
-screenshots/   # Bằng chứng — Phase 2-3
-csrf-poc.html  # File PoC CSRF — mở bằng browser là demo được
+security-lab-plan.md  # Plan tổng quan cấp cao (mục đích apply + timeline)
+agent/                # Tài liệu quy trình phát triển (đọc agent/WORKFLOW.md trước)
+tasks/                # Kế hoạch từng bước nhỏ + runbook khai thác (00-12)
+docs/                 # Hướng dẫn (setup, rules, decisions) + reference
+app/                  # Mã nguồn (React client + Express server + PostgreSQL) — Phase 1
+findings/             # Báo cáo lỗ hổng — Phase 4
+screenshots/          # Bằng chứng — Phase 2-3
+csrf-poc.html         # File PoC CSRF — mở bằng browser là demo được
 ```
 
 ## Giấy phép
