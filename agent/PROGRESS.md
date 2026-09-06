@@ -7,7 +7,7 @@
 ## Tổng quan
 
 ```
-Trạng thái: Phase 1 (build app) ĐANG LÀM — task 01 + 02 + 03 xong
+Trạng thái: Phase 1 (build app) ĐANG LÀM — task 01 + 02 + 03 + 04 xong
 Bắt đầu: 2026-09-03
 Cập nhật: 2026-09-06
 Target: 4 findings exploit được + reports + README + GitHub public
@@ -29,7 +29,7 @@ Files: agent/*.md, tasks/*.md, docs/guides/*.md
 ### Phase 1: Build app + 4 vulns 🔄 (tasks/01 → 08)
 
 ```
-Trạng thái: ĐANG LÀM — task 01 + 02 + 03 HOÀN THÀNH
+Trạng thái: ĐANG LÀM — task 01 + 02 + 03 + 04 HOÀN THÀNH
 Người làm: AI
 ```
 
@@ -101,6 +101,21 @@ Cần cài ⬜: (đã cài hết — chờ task 03 mới thêm routes mới)
 ---
 
 ## Session History
+
+### Session 2026-09-06 — Phase 1: Task 04 Products + Search + SQLi (F01b)
+**Trạng thái:** Hoàn thành
+**Đã làm:**
+- Tạo routes/products.ts (GET /api/products với category filter + search q)
+- Tạo client: Home.tsx (hero + 8 featured products), Products.tsx (category filter + search), ProductCard.tsx
+- Cập nhật App.tsx: routing (/, /products, /login)
+- Mount productsRouter vào index.ts
+- Verify: /api/products trả 15 products
+- Verify: SQLi `q='` → 500 verbose error (F04-3)
+- Verify: `q=' ORDER BY 6--` → 200, `q=' ORDER BY 7--` → 500 (6 cột)
+- Verify: UNION dump thành công → thấy 3 users + password plaintext
+
+**Tiếp theo:**
+- Task 05: Reviews + Stored XSS (F02)
 
 ### Session 2026-09-06 — Phase 1: Task 03 Auth + Login + SQLi (F01a)
 **Trạng thái:** Hoàn thành
