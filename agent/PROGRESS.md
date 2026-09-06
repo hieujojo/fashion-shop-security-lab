@@ -7,7 +7,7 @@
 ## Tổng quan
 
 ```
-Trạng thái: Phase 1 (build app) ĐANG LÀM — task 01 + 02 + 03 + 04 xong
+Trạng thái: Phase 1 (build app) ĐANG LÀM — task 01-05 xong
 Bắt đầu: 2026-09-03
 Cập nhật: 2026-09-06
 Target: 4 findings exploit được + reports + README + GitHub public
@@ -29,7 +29,7 @@ Files: agent/*.md, tasks/*.md, docs/guides/*.md
 ### Phase 1: Build app + 4 vulns 🔄 (tasks/01 → 08)
 
 ```
-Trạng thái: ĐANG LÀM — task 01 + 02 + 03 + 04 HOÀN THÀNH
+Trạng thái: ĐANG LÀM — task 01-05 HOÀN THÀNH
 Người làm: AI
 ```
 
@@ -101,6 +101,21 @@ Cần cài ⬜: (đã cài hết — chờ task 03 mới thêm routes mới)
 ---
 
 ## Session History
+
+### Session 2026-09-06 — Phase 1: Task 05 Reviews + Stored XSS (F02)
+**Trạng thái:** Hoàn thành
+**Đã làm:**
+- Tạo routes/reviews.ts (GET/POST /api/products/:id/reviews, lưu content thô)
+- Tạo client: ProductDetail.tsx (thông tin SP + form review + ReviewList)
+- Tạo components/ReviewList.tsx (render content bằng dangerouslySetInnerHTML — VULN-F02)
+- Cập nhật App.tsx: thêm route /products/:id
+- Mount reviewsRouter vào index.ts
+- Verify: GET /api/products/1/reviews → 2 seed reviews
+- Verify: POST review có payload `<img src=x onerror="alert(document.cookie)">` → lưu thành công (id=6)
+- Lưu ý: XSS chỉ chạy khi mở trang ProductDetail bằng browser (cần verify tay ở Phase 2)
+
+**Tiếp theo:**
+- Task 06: Profile + CSRF (F03)
 
 ### Session 2026-09-06 — Phase 1: Task 04 Products + Search + SQLi (F01b)
 **Trạng thái:** Hoàn thành
