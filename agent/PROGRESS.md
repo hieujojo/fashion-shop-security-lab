@@ -7,7 +7,7 @@
 ## Tổng quan
 
 ```
-Trạng thái: Phase 1 (build app) ĐANG LÀM — task 01 + 02 xong
+Trạng thái: Phase 1 (build app) ĐANG LÀM — task 01 + 02 + 03 xong
 Bắt đầu: 2026-09-03
 Cập nhật: 2026-09-06
 Target: 4 findings exploit được + reports + README + GitHub public
@@ -29,7 +29,7 @@ Files: agent/*.md, tasks/*.md, docs/guides/*.md
 ### Phase 1: Build app + 4 vulns 🔄 (tasks/01 → 08)
 
 ```
-Trạng thái: ĐANG LÀM — task 01 + 02 HOÀN THÀNH
+Trạng thái: ĐANG LÀM — task 01 + 02 + 03 HOÀN THÀNH
 Người làm: AI
 ```
 
@@ -101,6 +101,21 @@ Cần cài ⬜: (đã cài hết — chờ task 03 mới thêm routes mới)
 ---
 
 ## Session History
+
+### Session 2026-09-06 — Phase 1: Task 03 Auth + Login + SQLi (F01a)
+**Trạng thái:** Hoàn thành
+**Đã làm:**
+- Tạo middleware.ts (requireAuth + requireAdmin, parameterized query — đúng chuẩn)
+- Tạo routes/auth.ts (POST /api/login với SQLi cố ý + POST /api/logout)
+- Tạo client/src/api.ts (fetch wrapper với credentials: 'include')
+- Tạo client/src/pages/Login.tsx (form Tailwind, login → lưu localStorage)
+- Tạo client/src/index.css, main.tsx, App.tsx, index.html (minimal client)
+- Sửa server/src/index.ts: thêm cookieParser + mount authRouter
+- Verify: SQLi bypass thành công (admin@fashionhub.dev'-- → 200 admin)
+- Verify: login alice bình thường → cookie session=2 set đúng flags
+
+**Tiếp theo:**
+- Task 04: Products + Search + UNION SQLi (F01b)
 
 ### Session 2026-09-06 — Phase 1: Task 02 DB schema + seed
 **Trạng thái:** Hoàn thành
