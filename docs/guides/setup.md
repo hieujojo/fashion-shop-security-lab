@@ -109,5 +109,5 @@ fashion-shop-security-lab/
 ├── poc/csrf-poc.html
 ├── findings/       # (tạo ở tasks/11)
 ├── screenshots/    # (tạo ở tasks/09-10)
-└── README.md       # (tạo ở tasks/11 — tiếng Anh)
+└── README.md       # (tiếng Việt — xem decisions.md D11)
 ```

