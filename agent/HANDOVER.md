@@ -51,6 +51,26 @@
 
 ## 📝 History
 
+### Session 2026-09-06 — Phase 1 HOÀN THÀNH / Phase 2 BẮT ĐẦU
+**Trạng thái:** Hoàn thành
+**Task hiện tại:** tasks/08 (polish) → xong, chuyển sang Phase 2
+**Đã làm:**
+- [x] Toàn bộ Phase 1 (tasks/01-08): scaffold + DB + Auth + Products + Reviews + Profile + Admin + Polish
+- [x] 4 vuln còn nguyên trong code (F01a, F01b, F02, F03, F04)
+- [x] App chạy được: http://localhost:5173 (client) + http://localhost:3000 (API)
+- [x] PostgreSQL chạy trong Docker (fashionhub-db, port 5432)
+
+**Cần làm tiếp:**
+- Phase 2: Bạn tự tay khai thác theo tasks/09 (manual exploit runbook)
+- Phase 3: tasks/10 (OWASP ZAP scan)
+- Phase 4: tasks/11 (findings reports)
+- Phase 5: tasks/12 (publish)
+
+**Lưu ý cho session sau:**
+- Browser LUÔN dùng http://localhost:5173 (KHÔNG dùng 127.0.0.1 — cookie Secure + same-site)
+- Task 09 cần bạn tự thao tác: login admin, post review XSS, mở csrf-poc.html, chụp screenshot
+- Giữ nguyên Docker container chạy (không cần restart nếu chưa tắt)
+
 ### Session 2026-09-03 — Phase 0: Plan chi tiết
 **Trạng thái:** Hoàn thành
 **Task hiện tại:** — (planning xong, chưa code)

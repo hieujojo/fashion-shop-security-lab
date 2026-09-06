@@ -60,6 +60,14 @@ Ghi chú: tạo 1 script nhỏ sinh 15 file (scripts/gen-svgs.mjs) HOẶC viết
 
 ---
 
+## ✅ Kết thúc Phase 1
+
+```
+□ Tick toàn bộ ✅ trong PROGRESS.md (Phase 1 + cột "Code xong" của 4 findings)
+□ Ghi HANDOVER.md → Phase 2 bắt đầu (tasks/09 — BẠN làm)
+□ Thông báo cho bạn: app sẵn sàng để TỰ TAY khai thác
+```
+
 ## Verify checklist (cuối Phase 1 — toàn diện)
 
 ```
@@ -99,3 +107,5 @@ Commit mẫu:
 □ Ghi HANDOVER.md → Phase 2 bắt đầu (tasks/09 — BẠN làm)
 □ Thông báo cho bạn: app sẵn sàng để TỰ TAY khai thác
 ```
+
+✅ Task 08 completed — Phase 1 finished

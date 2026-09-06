@@ -7,7 +7,7 @@
 ## Tổng quan
 
 ```
-Trạng thái: Phase 1 (build app) ĐANG LÀM — task 01-07 xong
+Trạng thái: Phase 1 HOÀN THÀNH — Phase 2 (khai thác tay) sẵn sàng
 Bắt đầu: 2026-09-03
 Cập nhật: 2026-09-06
 Target: 4 findings exploit được + reports + README + GitHub public
@@ -26,10 +26,10 @@ Việc: Tạo agent/ + tasks/01-12 + docs/guides (bắt chước distributed-cac
 Files: agent/*.md, tasks/*.md, docs/guides/*.md
 ```
 
-### Phase 1: Build app + 4 vulns 🔄 (tasks/01 → 08)
+### Phase 1: Build app + 4 vulns ✅ (tasks/01 → 08)
 
 ```
-Trạng thái: ĐANG LÀM — task 01-07 HOÀN THÀNH
+Trạng thái: HOÀN THÀNH
 Người làm: AI
 ```
 
@@ -67,10 +67,10 @@ Người làm: AI
 
 | Finding | Code xong | Exploit tay xong | Screenshot | Hiểu + giải thích được | Report xong |
 |---|---|---|---|---|---|
-| F01 SQLi | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| F02 Stored XSS | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| F03 CSRF | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| F04 Misconfig/Auth | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| F01 SQLi | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
+| F02 Stored XSS | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
+| F03 CSRF | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
+| F04 Misconfig/Auth | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
 | ZAP alerts + triage | — | ⬜ | ⬜ | ⬜ | ⬜ |
 
 ---
@@ -101,6 +101,19 @@ Cần cài ⬜: (đã cài hết — chờ task 03 mới thêm routes mới)
 ---
 
 ## Session History
+
+### Session 2026-09-06 — Phase 1: Task 08 Polish + SVG placeholders
+**Trạng thái:** Hoàn thành
+**Đã làm:**
+- Tạo scripts/gen-svgs.cjs + chạy sinh 15 SVG placeholder (pastel colors theo category)
+- Cập nhật App.tsx: user state + Navbar động (hiện email, links Login/Profile/Admin/Logout)
+- Cập nhật Login.tsx: redirect về / sau login
+- Cập nhật Profile.tsx: redirect về /login nếu chưa đăng nhập
+- Verify: 4 vuln còn nguyên (F01a bypass, F01b UNION dump, F02 XSS review, F03 CSRF condition, F04 verbose error)
+- Phase 1 kết thúc — app sẵn sàng cho Phase 2
+
+**Tiếp theo:**
+- Phase 2: Bạn tự tay khai thác theo tasks/09
 
 ### Session 2026-09-06 — Phase 1: Task 07 Admin panel + Misconfiguration (F04)
 **Trạng thái:** Hoàn thành

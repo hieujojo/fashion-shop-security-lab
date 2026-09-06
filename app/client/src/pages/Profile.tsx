@@ -15,7 +15,9 @@ export default function Profile() {
   useEffect(() => {
     api<User>('/api/profile')
       .then(setUser)
-      .catch(() => setUser(null));
+      .catch(() => {
+        window.location.href = '/login';
+      });
   }, []);
 
   async function handleSubmit(e: React.FormEvent) {
