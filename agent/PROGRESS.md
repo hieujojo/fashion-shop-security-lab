@@ -7,7 +7,7 @@
 ## Tổng quan
 
 ```
-Trạng thái: Phase 1 (build app) ĐANG LÀM — task 01-05 xong
+Trạng thái: Phase 1 (build app) ĐANG LÀM — task 01-06 xong
 Bắt đầu: 2026-09-03
 Cập nhật: 2026-09-06
 Target: 4 findings exploit được + reports + README + GitHub public
@@ -29,7 +29,7 @@ Files: agent/*.md, tasks/*.md, docs/guides/*.md
 ### Phase 1: Build app + 4 vulns 🔄 (tasks/01 → 08)
 
 ```
-Trạng thái: ĐANG LÀM — task 01-05 HOÀN THÀNH
+Trạng thái: ĐANG LÀM — task 01-06 HOÀN THÀNH
 Người làm: AI
 ```
 
@@ -101,6 +101,21 @@ Cần cài ⬜: (đã cài hết — chờ task 03 mới thêm routes mới)
 ---
 
 ## Session History
+
+### Session 2026-09-06 — Phase 1: Task 06 Profile + CSRF (F03)
+**Trạng thái:** Hoàn thành
+**Đã làm:**
+- Tạo routes/profile.ts (GET /api/profile, POST /api/profile/email — KHÔNG có CSRF token)
+- Tạo client/src/pages/Profile.tsx (hiện email + form đổi email)
+- Tạo poc/csrf-poc.html (form ẩn tự submit sang /api/profile/email)
+- Cập nhật App.tsx: thêm /profile route + Navbar
+- Mount profileRouter vào index.ts
+- Verify: GET /api/profile → 401 không có cookie, 200 có cookie
+- Verify: POST /api/profile/email với session cookie → email đổi thành công
+- CSRF condition met: endpoint chỉ dựa cookie, không token, SameSite=None
+
+**Tiếp theo:**
+- Task 07: Admin panel + Misconfiguration (F04)
 
 ### Session 2026-09-06 — Phase 1: Task 05 Reviews + Stored XSS (F02)
 **Trạng thái:** Hoàn thành
