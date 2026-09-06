@@ -7,7 +7,7 @@
 ## Tổng quan
 
 ```
-Trạng thái: Phase 1 (build app) ĐANG LÀM — task 01 xong
+Trạng thái: Phase 1 (build app) ĐANG LÀM — task 01 + 02 xong
 Bắt đầu: 2026-09-03
 Cập nhật: 2026-09-06
 Target: 4 findings exploit được + reports + README + GitHub public
@@ -29,7 +29,7 @@ Files: agent/*.md, tasks/*.md, docs/guides/*.md
 ### Phase 1: Build app + 4 vulns 🔄 (tasks/01 → 08)
 
 ```
-Trạng thái: ĐANG LÀM — task 01 HOÀN THÀNH
+Trạng thái: ĐANG LÀM — task 01 + 02 HOÀN THÀNH
 Người làm: AI
 ```
 
@@ -78,8 +78,8 @@ Người làm: AI
 ## Dependencies (app)
 
 ```
-Đã cài ✅: (chưa)
-Cần cài ⬜: xem tasks/00-overview.md
+Đã cài ✅: dependencies (concurrently, express, pg, react, vite, tailwindcss...)
+Cần cài ⬜: (đã cài hết — chờ task 03 mới thêm routes mới)
 ```
 
 ---
@@ -101,6 +101,18 @@ Cần cài ⬜: xem tasks/00-overview.md
 ---
 
 ## Session History
+
+### Session 2026-09-06 — Phase 1: Task 02 DB schema + seed
+**Trạng thái:** Hoàn thành
+**Đã làm:**
+- Tạo app/sql/schema.sql (3 bảng: users, products, reviews)
+- Tạo app/sql/seed.sql (3 users, 15 products, 5 reviews)
+- Tạo app/server/src/db.ts (pg Pool, env-driven)
+- Tạo app/server/scripts/db-setup.ts (idempotent: CREATE DATABASE nếu chưa có, chạy schema + seed)
+- Verify: docker compose up, npm run db:setup → seeded 3 users, 15 products, 5 reviews
+
+**Tiếp theo:**
+- Task 03: Auth + Login + SQLi bypass (F01a)
 
 ### Session 2026-09-06 — Phase 1: Task 01 scaffold
 **Trạng thái:** Hoàn thành

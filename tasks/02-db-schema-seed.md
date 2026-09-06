@@ -119,6 +119,8 @@ export const pool = new Pool({
 □ Thêm endpoint tạm GET /api/health/db trả về count(*) từng bảng → bỏ sau (hoặc giữ nếu muốn)
 ```
 
+✅ Task 02 completed — all files created and verified
+
 ---
 
 ## Changelog + Commit
