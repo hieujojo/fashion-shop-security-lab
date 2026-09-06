@@ -7,9 +7,9 @@
 ## Tổng quan
 
 ```
-Trạng thái: Phase 0 (lập plan chi tiết) HOÀN THÀNH
+Trạng thái: Phase 1 (build app) ĐANG LÀM — task 01 xong
 Bắt đầu: 2026-09-03
-Cập nhật: 2026-09-03
+Cập nhật: 2026-09-06
 Target: 4 findings exploit được + reports + README + GitHub public
 Nguyên tắc: bạn TỰ TAY khai thác Phase 2-3 (AI không làm thay)
 ```
@@ -26,10 +26,10 @@ Việc: Tạo agent/ + tasks/01-12 + docs/guides (bắt chước distributed-cac
 Files: agent/*.md, tasks/*.md, docs/guides/*.md
 ```
 
-### Phase 1: Build app + 4 vulns ⬜ (tasks/01 → 08)
+### Phase 1: Build app + 4 vulns 🔄 (tasks/01 → 08)
 
 ```
-Trạng thái: CHƯA BẮT ĐẦU
+Trạng thái: ĐANG LÀM — task 01 HOÀN THÀNH
 Người làm: AI
 ```
 
@@ -101,6 +101,16 @@ Cần cài ⬜: xem tasks/00-overview.md
 ---
 
 ## Session History
+
+### Session 2026-09-06 — Phase 1: Task 01 scaffold
+**Trạng thái:** Hoàn thành
+**Đã làm:**
+- Tạo app/docker-compose.yml, app/package.json (workspace), server/client package.json
+- Tạo tsconfig + vite.config.ts + .gitignore + app/sql/ folder
+- Tạo server/src/index.ts minimal (express + health endpoint)
+
+**Tiếp theo:**
+- Task 02: DB schema + seed + db-setup script
 
 ### Session 2026-09-03 — Phase 0: Plan chi tiết
 **Trạng thái:** Hoàn thành

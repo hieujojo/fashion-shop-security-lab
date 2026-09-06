@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: fashionhub-db
+    environment:
+      POSTGRES_USER: fashionhub
+      POSTGRES_PASSWORD: fashionhub
+      POSTGRES_DB: fashionhub
+    ports:
+      - "5432:5432"
+    volumes:
+      - fashionhub-data:/var/lib/postgresql/data
+volumes:
+  fashionhub-data:

@@ -125,6 +125,8 @@ dist/
 □ http://localhost:5173/api/health                       → {"ok":true}  (proxy hoạt động!)
 ```
 
+✅ Task 01 completed — all files created
+
 ---
 
 ## Changelog + Commit
