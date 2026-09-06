@@ -126,5 +126,8 @@ Khi bạn xong 1 vuln → tick ✅ + ghi chú "hiểu và giải thích được
 | docs/guides/decisions.md | Các quyết định đã chốt (KHÔNG tự đổi) |
 | docs/architecture/architecture.md | Kiến trúc các lớp + trust boundaries + bản đồ vuln |
 | docs/architecture/tech-stack.md | Lý do chọn từng công nghệ + alternatives |
-| docs/concepts/*.md | Khái niệm nền (cookie/session, SOP-CSRF-XSS, OWASP, quy trình test) — đọc để HIỂU + phỏng vấn |
+| docs/concepts/fundamentals.md | Tổng quan + bản đồ project + khởi động người mới |
+| docs/concepts/session-cookie-csrf-xss.md | Cookie, session, SOP, CSRF, XSS — nền cho F02+F03 |
+| docs/concepts/owasp-top10-and-4-vulns.md | OWASP Top 10 + 4 vuln lab + cách sửa |
+| docs/concepts/testing-and-reporting.md | Quy trình kiểm thử + format report + sai lầm phổ biến |
 | docs/reference/changelog.md | Bug log |

@@ -179,7 +179,7 @@ CỐ Ý yếu (VULN):
 
 > Quy tắc vàng để nhớ: **F01 + F02 là lỗi ở điểm "đầu vào → xử lý"**, **F03 là lỗi ở
 > "cơ chế xác thực request"**, **F04 là lỗi ở "cấu hình hệ thống"** — 3 tầng khác nhau,
-> scanner + tay đều phải cover (xem `docs/concepts/web-security-testing-flow.md`).
+  > scanner + tay đều phải cover (xem `docs/concepts/testing-and-reporting.md`).
 
 ## Điểm yếu cố ý — tổng kết 1 bảng
 

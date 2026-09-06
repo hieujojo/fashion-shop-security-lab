@@ -142,4 +142,4 @@ SQLite:
 | sanitizer (DOMPurify…) | Không sanitize review | F02 |
 
 > Nguyên tắc: chỉ thiếu những control CẦN THIẾT cho 4 finding. Thiếu lung tung = report
-> loãng + triage mệt (xem `docs/concepts/web-security-testing-flow.md`).
+> loãng + triage mệt (xem `docs/concepts/testing-and-reporting.md`).
