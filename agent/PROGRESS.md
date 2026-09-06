@@ -7,7 +7,7 @@
 ## Tổng quan
 
 ```
-Trạng thái: Phase 1 (build app) ĐANG LÀM — task 01-06 xong
+Trạng thái: Phase 1 (build app) ĐANG LÀM — task 01-07 xong
 Bắt đầu: 2026-09-03
 Cập nhật: 2026-09-06
 Target: 4 findings exploit được + reports + README + GitHub public
@@ -29,7 +29,7 @@ Files: agent/*.md, tasks/*.md, docs/guides/*.md
 ### Phase 1: Build app + 4 vulns 🔄 (tasks/01 → 08)
 
 ```
-Trạng thái: ĐANG LÀM — task 01-06 HOÀN THÀNH
+Trạng thái: ĐANG LÀM — task 01-07 HOÀN THÀNH
 Người làm: AI
 ```
 
@@ -101,6 +101,20 @@ Cần cài ⬜: (đã cài hết — chờ task 03 mới thêm routes mới)
 ---
 
 ## Session History
+
+### Session 2026-09-06 — Phase 1: Task 07 Admin panel + Misconfiguration (F04)
+**Trạng thái:** Hoàn thành
+**Đã làm:**
+- Tạo routes/admin.ts (GET /api/admin/users, /products, /reviews — requireAuth + requireAdmin)
+- Tạo client/src/pages/Admin.tsx (3 tab read-only: Users, Products, Reviews)
+- Reviews tab render content bằng dangerouslySetInnerHTML (kế thừa F02 chain)
+- Cập nhật App.tsx: thêm /admin route
+- Mount adminRouter vào index.ts
+- Verify: admin truy cập được 3 endpoints, alice (customer) → 403, không login → 401
+- Verify: admin reviews endpoint trả về review có payload XSS (id=6, mallory, `<img src=x onerror="alert(document.cookie)">`)
+
+**Tiếp theo:**
+- Task 08: Polish + seed images
 
 ### Session 2026-09-06 — Phase 1: Task 06 Profile + CSRF (F03)
 **Trạng thái:** Hoàn thành

@@ -4,6 +4,7 @@ import authRouter from './routes/auth';
 import productsRouter from './routes/products';
 import reviewsRouter from './routes/reviews';
 import profileRouter from './routes/profile';
+import adminRouter from './routes/admin';
 
 const app = express();
 app.use(cookieParser());
@@ -13,5 +14,6 @@ app.use('/api', authRouter);
 app.use('/api', productsRouter);
 app.use('/api', reviewsRouter);
 app.use('/api', profileRouter);
+app.use('/api', adminRouter);
 app.get('/api/health', (_req, res) => res.json({ ok: true }));
 app.listen(3000, () => console.log('API on http://localhost:3000'));
