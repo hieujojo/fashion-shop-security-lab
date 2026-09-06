@@ -59,32 +59,71 @@ Chi tiết: xem `findings/` (Phase 4).
 
 ## Thứ tự đọc tài liệu
 
-Để hiểu toàn bộ project từ nền đến từng lỗ hổng:
+Repo này có 2 nhóm tài liệu: **hiểu project** (đọc 1 lần) và **làm việc** (tra mỗi ngày).
+
+### Nhóm 1 — Hiểu project (đọc theo thứ tự)
 
 ```
 1. docs/concepts/fundamentals.md
-   → Tổng quan cách đọc tài liệu, bản đồ project, hướng dẫn bắt đầu hiểu bảo mật web.
+   Cái gì: Tổng quan cách đọc tài liệu, bản đồ project, hướng dẫn bắt đầu hiểu bảo mật web.
+   Khi nào đọc: ĐẦU TIÊN — biết "phần nào minh hoạ cái gì" trước khi đọc chi tiết.
 
 2. docs/concepts/session-cookie-csrf-xss.md
-   → HTTP cookie, session, SameSite, SOP, CSRF, XSS — nền chung cho F02 + F03.
+   Cái gì: HTTP cookie, session, SameSite, SOP, CSRF, XSS — toàn bộ nền chung cho F02 + F03.
+   Khi nào đọc: Thứ 2 — hiểu cách browser hoạt động, vì sao cookie yếu dẫn đến 2 vuln lớn.
 
 3. docs/concepts/owasp-top10-and-4-vulns.md
-   → 4 lỗ hổng trong lab, OWASP mapping, payload, cách sửa.
+   Cái gì: 4 lỗ hổng trong lab (SQLi, Stored XSS, CSRF, Misconfig), OWASP mapping, payload, cách sửa.
+   Khi nào đọc: Thứ 3 — biết cụ thể từng vuln là gì, nằm ở đâu, payload nào, impact thế nào.
 
 4. docs/concepts/testing-and-reporting.md
-   → Quy trình 7 bước kiểm thử, cách viết report, sai lầm phổ biến.
+   Cái gì: Quy trình 7 bước kiểm thử, format report 8 mục, sai lầm phổ biến.
+   Khi nào đọc: Thứ 4 — biết "làm thế nào để kiểm thử có hệ thống và viết report chuyên nghiệp".
 
-5. docs/architecture/architecture.md + docs/architecture/tech-stack.md
-   → Kiến trúc các lớp, trust boundaries, lý do chọn từng công nghệ.
+5. docs/architecture/architecture.md
+   Cái gì: 4 lớp (Browser → Network → Server → Data), trust boundaries, bản đồ attack chain.
+   Khi nào đọc: Thứ 5 — hiểu luồng dữ liệu, biết "tấn công vào từ đâu, phòng thủ ở đâu".
 
-6. docs/guides/decisions.md
-   → Các quyết định đã chốt (KHÔNG tự đổi) — đọc trước khi code Phase 1.
+6. docs/architecture/tech-stack.md
+   Cái gì: Lý do chọn từng công nghệ + alternatives đã cân nhắc.
+   Khi nào đọc: Thứ 6 — hiểu "tại sao dùng Express thay NestJS", "tại sao không Supabase"...
+```
 
-7. docs/guides/rules.md
-   → Quy tắc bắt buộc khi làm việc với lab.
+### Nhóm 2 — Làm việc (tra mỗi ngày)
 
-8. tasks/*.md
-   → Runbook từng bước nhỏ (00–12), đặc biệt tasks/09 (khai thác tay) + tasks/10 (ZAP).
+```
+7. docs/guides/decisions.md
+   Cái gì: 13 quyết định đã chốt (D1–D13) — KHÔNG tự đổi.
+   Khi nào tra: Trước khi code / trước khi hỏi "tại sao làm vậy?" → đọc đây trước.
+
+8. docs/guides/rules.md
+   Cái gì: 10 quy tắc bắt buộc + lessons learned.
+   Khi nào tra: Khi nghi ngờ "mình làm đúng không?" hoặc gặp lỗi cần xử lý.
+
+9. docs/guides/setup.md
+   Cái gì: Hướng dẫn cài đặt + chạy app + troubleshooting.
+   Khi nào tra: Lần đầu chạy lab, hoặc gặp lỗi "port busy", "cannot find module", "cookie không lưu".
+
+10. docs/reference/changelog.md
+    Cái gì: Bug log — ghi lại lỗi THẬT (app chạy sai so với thiết kế).
+    Khi nào tra: Khi gặp bug, tra xem đã ai ghi chưa; hoặc ghi bug mới vào đây.
+```
+
+### Nhóm 3 — Tham khảo sâu (chỉ đọc khi cần)
+
+```
+11. agent/MODULES.md
+    Cái gì: Bản đồ 4 vuln → nơi cài trong code, payload, file nào sửa.
+    Khi nào tra: Khi cần tìm nhanh "F02 nằm ở file nào?" hoặc "payload F03 là gì?".
+
+12. agent/CODE_STYLE.md
+    Cái gì: Cách đánh dấu // VULN-F0x, quy tắc comment, API shape.
+    Khi nào tra: Khi viết code Phase 1, tra trước khi commit.
+
+13. tasks/*.md (00–12)
+    Cái gì: Runbook từng bước nhỏ.
+    Khi nào đọc: Làm từng task — đọc tasks/NN trước khi bắt đầu, đọc tasks/09 khi khai thác tay,
+    đọc tasks/10 khi chạy ZAP.
 ```
 
 ---
