@@ -61,28 +61,28 @@ export default function ProductDetail() {
     }
   }
 
-  if (!product) return <div className="max-w-6xl mx-auto mt-8">Loading...</div>;
+  if (!product) return <div className="max-w-7xl mx-auto mt-8">Loading...</div>;
 
   const price = (product.price_cents / 100).toFixed(2);
 
   return (
-    <div className="max-w-6xl mx-auto mt-8 px-4">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <Link to="/products" className="text-sm text-gray-500 hover:underline mb-4 inline-block">
         ← Back to products
       </Link>
       <div className="grid md:grid-cols-2 gap-8 mb-12">
-        <div className="bg-gray-100 h-96 flex items-center justify-center rounded">
-          <img src={product.image_url} alt={product.name} className="h-full w-full object-cover rounded" />
+        <div className="bg-gray-100 aspect-square">
+          <img src={product.image_url} alt={product.name} className="w-full h-full object-cover" />
         </div>
-        <div>
-          <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
-          <p className="text-gray-500 capitalize mb-4">{product.category}</p>
-          <p className="text-2xl font-bold mb-4">${price}</p>
+        <div className="flex flex-col justify-center">
+          <p className="text-sm text-gray-500 capitalize mb-2">{product.category}</p>
+          <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+          <p className="text-3xl font-bold mb-6">${price}</p>
           <p className="text-gray-700 mb-6">{product.description}</p>
         </div>
       </div>
 
-      <div className="mb-12">
+      <div className="border-t pt-8">
         <h2 className="text-2xl font-bold mb-6">Reviews</h2>
         <form onSubmit={handleSubmit} className="border rounded p-6 mb-8 space-y-4">
           <h3 className="font-medium">Write a review</h3>
@@ -92,13 +92,13 @@ export default function ProductDetail() {
               placeholder="Your name"
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
-              className="border rounded px-3 py-2"
+              className="border rounded px-3 py-2 text-sm"
               required
             />
             <select
               value={rating}
               onChange={(e) => setRating(Number(e.target.value))}
-              className="border rounded px-3 py-2"
+              className="border rounded px-3 py-2 text-sm"
             >
               {[5, 4, 3, 2, 1].map((n) => (
                 <option key={n} value={n}>{n} star{n > 1 ? 's' : ''}</option>
@@ -109,10 +109,14 @@ export default function ProductDetail() {
             placeholder="Your review"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="w-full border rounded px-3 py-2 h-24"
+            className="w-full border rounded px-3 py-2 text-sm h-24"
             required
           />
-          <button type="submit" disabled={loading} className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 disabled:opacity-50">
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-black text-white px-6 py-2 rounded text-sm font-medium hover:bg-gray-800 disabled:opacity-50"
+          >
             {loading ? 'Posting...' : 'Post review'}
           </button>
         </form>

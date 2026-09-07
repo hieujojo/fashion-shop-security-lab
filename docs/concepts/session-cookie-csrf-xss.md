@@ -1,4 +1,4 @@
-# HTTP, Cookie, Session, SOP, CSRF & XSS
+# HTTP, Cookie, Session, SOP, CSRF & XSS  
 
 > File này là nền chung cho **F02 (Stored XSS)** và **F03 (CSRF)** — 2 vuln "hiểu nhầm nhiều nhất"
 > của người mới. Cả hai đều xoay quanh **trình duyệt** và **origin**, không phải server.

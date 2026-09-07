@@ -11,14 +11,18 @@ interface Product {
 export default function ProductCard({ product }: { product: Product }) {
   const price = (product.price_cents / 100).toFixed(2);
   return (
-    <Link to={`/products/${product.id}`} className="border rounded overflow-hidden hover:shadow-lg transition">
-      <div className="bg-gray-100 h-48 flex items-center justify-center">
-        <img src={product.image_url} alt={product.name} className="h-full w-full object-cover" />
+    <Link to={`/products/${product.id}`} className="group">
+      <div className="bg-gray-100 aspect-[3/4] overflow-hidden mb-3">
+        <img
+          src={product.image_url}
+          alt={product.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
       </div>
-      <div className="p-4">
-        <h3 className="font-medium mb-1">{product.name}</h3>
-        <p className="text-sm text-gray-500 mb-2">{product.category}</p>
-        <p className="font-bold">${price}</p>
+      <div>
+        <h3 className="font-medium text-sm mb-1 group-hover:underline">{product.name}</h3>
+        <p className="text-sm text-gray-500 mb-1 capitalize">{product.category}</p>
+        <p className="text-sm font-semibold">${price}</p>
       </div>
     </Link>
   );

@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Home page', () => {
-  test('shows FashionHub heading', async ({ page }) => {
+  test('shows hero heading', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('h1')).toHaveText('FashionHub');
+    await expect(page.locator('h1')).toHaveText('New Season Arrivals');
   });
 
   test('shows featured products section', async ({ page }) => {
