@@ -27,17 +27,50 @@ export default function ProductDetail() {
   const [rating, setRating] = useState(5);
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<'loading' | 'ready' | 'error' | 'not-found'>('loading');
 
   useEffect(() => {
     if (!id) return;
-    fetch(`/api/products/${id}`)
-      .then((r) => r.json())
-      .then(setProduct)
-      .catch(() => {});
-    fetch(`/api/products/${id}/reviews`)
-      .then((r) => r.json())
-      .then(setReviews)
-      .catch(() => {});
+    let cancelled = false;
+    setStatus('loading');
+
+    async function load() {
+      try {
+        const [pRes, rRes] = await Promise.allSettled([
+          fetch(`/api/products/${id}`),
+          fetch(`/api/products/${id}/reviews`),
+        ]);
+
+        if (cancelled) return;
+
+        if (pRes.status === 'fulfilled') {
+          if (pRes.value.status === 404) {
+            setStatus('not-found');
+            return;
+          }
+          if (!pRes.value.ok) {
+            setStatus('error');
+            return;
+          }
+          setProduct(await pRes.value.json());
+        } else {
+          setStatus('error');
+          return;
+        }
+
+        if (rRes.status === 'fulfilled' && rRes.value.ok) {
+          setReviews(await rRes.value.json());
+        }
+        setStatus('ready');
+      } catch {
+        if (!cancelled) setStatus('error');
+      }
+    }
+
+    load();
+    return () => {
+      cancelled = true;
+    };
   }, [id]);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -61,7 +94,33 @@ export default function ProductDetail() {
     }
   }
 
-  if (!product) return <div className="max-w-7xl mx-auto mt-8">Loading...</div>;
+  if (status === 'loading') {
+    return <div className="max-w-7xl mx-auto px-4 py-16 text-gray-500">Loading…</div>;
+  }
+
+  if (status === 'not-found') {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-16 text-center">
+        <h1 className="text-2xl font-bold mb-2">Product not found</h1>
+        <p className="text-gray-600 mb-6">This product doesn't exist or has been removed.</p>
+        <Link to="/products" className="text-sm underline text-gray-700 hover:text-black">
+          ← Back to products
+        </Link>
+      </div>
+    );
+  }
+
+  if (status === 'error' || !product) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-16 text-center">
+        <h1 className="text-2xl font-bold mb-2">Something went wrong</h1>
+        <p className="text-gray-600 mb-6">We couldn't load this product. Please try again later.</p>
+        <Link to="/products" className="text-sm underline text-gray-700 hover:text-black">
+          ← Back to products
+        </Link>
+      </div>
+    );
+  }
 
   const price = (product.price_cents / 100).toFixed(2);
 
