@@ -15,12 +15,27 @@ interface User {
   role: string;
 }
 
+function readStoredUser(): User | null {
+  try {
+    const stored = localStorage.getItem('user');
+    if (!stored) return null;
+    const parsed = JSON.parse(stored) as Partial<User>;
+    if (parsed && typeof parsed.id === 'number' && typeof parsed.email === 'string') {
+      return { id: parsed.id, email: parsed.email, role: String(parsed.role ?? 'customer') };
+    }
+    return null;
+  } catch {
+    // Corrupted or non-JSON value — clear it so it doesn't break every load
+    localStorage.removeItem('user');
+    return null;
+  }
+}
+
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem('user');
-    if (stored) setUser(JSON.parse(stored));
+    setUser(readStoredUser());
   }, []);
 
   async function handleLogout() {
