@@ -77,55 +77,76 @@ export default function Admin() {
       {loading && <p className="text-sm text-gray-500 mb-4">Loading…</p>}
 
       {tab === 'users' && (
-        <table className="w-full border">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border px-4 py-2 text-left">ID</th>
-              <th className="border px-4 py-2 text-left">Email</th>
-              <th className="border px-4 py-2 text-left">Role</th>
-              <th className="border px-4 py-2 text-left">Created</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((u) => (
-              <tr key={u.id}>
-                <td className="border px-4 py-2">{u.id}</td>
-                <td className="border px-4 py-2">{u.email}</td>
-                <td className="border px-4 py-2">{u.role}</td>
-                <td className="border px-4 py-2">{new Date(u.created_at).toLocaleDateString()}</td>
+        <div className="overflow-x-auto border rounded">
+          <table className="w-full border-collapse min-w-[540px]">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border px-4 py-2 text-left">ID</th>
+                <th className="border px-4 py-2 text-left">Email</th>
+                <th className="border px-4 py-2 text-left">Role</th>
+                <th className="border px-4 py-2 text-left">Created</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.length === 0 && !loading && (
+                <tr>
+                  <td colSpan={4} className="px-4 py-8 text-center text-gray-500">
+                    No users found.
+                  </td>
+                </tr>
+              )}
+              {users.map((u) => (
+                <tr key={u.id}>
+                  <td className="border px-4 py-2">{u.id}</td>
+                  <td className="border px-4 py-2">{u.email}</td>
+                  <td className="border px-4 py-2">{u.role}</td>
+                  <td className="border px-4 py-2">{new Date(u.created_at).toLocaleDateString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
 
       {tab === 'products' && (
-        <table className="w-full border">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border px-4 py-2 text-left">ID</th>
-              <th className="border px-4 py-2 text-left">Name</th>
-              <th className="border px-4 py-2 text-left">Category</th>
-              <th className="border px-4 py-2 text-left">Price</th>
-              <th className="border px-4 py-2 text-left">Reviews</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((p) => (
-              <tr key={p.id}>
-                <td className="border px-4 py-2">{p.id}</td>
-                <td className="border px-4 py-2">{p.name}</td>
-                <td className="border px-4 py-2 capitalize">{p.category}</td>
-                <td className="border px-4 py-2">${(p.price_cents / 100).toFixed(2)}</td>
-                <td className="border px-4 py-2">{p.review_count}</td>
+        <div className="overflow-x-auto border rounded">
+          <table className="w-full border-collapse min-w-[640px]">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border px-4 py-2 text-left">ID</th>
+                <th className="border px-4 py-2 text-left">Name</th>
+                <th className="border px-4 py-2 text-left">Category</th>
+                <th className="border px-4 py-2 text-left">Price</th>
+                <th className="border px-4 py-2 text-left">Reviews</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {products.length === 0 && !loading && (
+                <tr>
+                  <td colSpan={5} className="px-4 py-8 text-center text-gray-500">
+                    No products found.
+                  </td>
+                </tr>
+              )}
+              {products.map((p) => (
+                <tr key={p.id}>
+                  <td className="border px-4 py-2">{p.id}</td>
+                  <td className="border px-4 py-2">{p.name}</td>
+                  <td className="border px-4 py-2 capitalize">{p.category}</td>
+                  <td className="border px-4 py-2">${(p.price_cents / 100).toFixed(2)}</td>
+                  <td className="border px-4 py-2">{p.review_count}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
 
       {tab === 'reviews' && (
         <div className="space-y-4">
+          {reviews.length === 0 && !loading && (
+            <p className="text-gray-500 py-8 text-center">No reviews found.</p>
+          )}
           {reviews.map((r) => (
             <div key={r.id} className="border rounded p-4">
               <div className="flex items-center gap-2 mb-2">
