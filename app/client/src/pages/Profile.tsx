@@ -11,10 +11,15 @@ export default function Profile() {
   const [user, setUser] = useState<User | null>(null);
   const [newEmail, setNewEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
 
   useEffect(() => {
     api<User>('/api/profile')
-      .then(setUser)
+      .then((u) => {
+        setUser(u);
+        setLoading(false);
+      })
       .catch(() => {
         window.location.href = '/login';
       });
@@ -36,7 +41,20 @@ export default function Profile() {
     }
   }
 
-  if (!user) return <div className="max-w-6xl mx-auto mt-8">Loading...</div>;
+  if (loading) {
+    return <div className="max-w-6xl mx-auto mt-16 px-4 text-center text-gray-500">Loading…</div>;
+  }
+
+  if (!user) {
+    return (
+      <div className="max-w-6xl mx-auto mt-16 px-4 text-center">
+        <p className="text-gray-600 mb-4">Failed to load your profile.</p>
+        <a href="/profile" className="text-sm underline text-gray-700 hover:text-black">
+          Try again
+        </a>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-6xl mx-auto mt-8 px-4">
