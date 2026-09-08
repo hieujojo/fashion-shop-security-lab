@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { api } from '../api';
 
 type Tab = 'users' | 'products' | 'reviews';
@@ -13,16 +14,47 @@ export default function Admin() {
   const [products, setProducts] = useState<Product[]>([]);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [error, setError] = useState('');
+  const [forbidden, setForbidden] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (tab === 'users') {
-      api<User[]>('/api/admin/users').then(setUsers).catch(() => setError('Failed to load users'));
-    } else if (tab === 'products') {
-      api<Product[]>('/api/admin/products').then(setProducts).catch(() => setError('Failed to load products'));
-    } else if (tab === 'reviews') {
-      api<Review[]>('/api/admin/reviews').then(setReviews).catch(() => setError('Failed to load reviews'));
-    }
+    const urls: Record<Tab, string> = {
+      users: '/api/admin/users',
+      products: '/api/admin/products',
+      reviews: '/api/admin/reviews',
+    };
+    const setters = {
+      users: setUsers,
+      products: setProducts,
+      reviews: setReviews,
+    } as const;
+
+    setLoading(true);
+    setError('');
+    setForbidden(false);
+    api<unknown[]>(urls[tab])
+      .then((data) => (setters[tab] as (v: unknown[]) => void)(data))
+      .catch((err: Error) => {
+        if (err.message.includes('403') || err.message.toLowerCase().includes('forbidden')) {
+          setForbidden(true);
+        } else {
+          setError(`Failed to load ${tab}`);
+        }
+      })
+      .finally(() => setLoading(false));
   }, [tab]);
+
+  if (forbidden) {
+    return (
+      <div className="max-w-6xl mx-auto mt-16 px-4 text-center">
+        <h1 className="text-2xl font-bold mb-2">403 — Admins only</h1>
+        <p className="text-gray-600 mb-6">You don't have permission to view this page.</p>
+        <Link to="/" className="text-sm underline text-gray-700 hover:text-black">
+          ← Back to home
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-6xl mx-auto mt-8 px-4">
@@ -41,6 +73,8 @@ export default function Admin() {
           </button>
         ))}
       </div>
+
+      {loading && <p className="text-sm text-gray-500 mb-4">Loading…</p>}
 
       {tab === 'users' && (
         <table className="w-full border">
