@@ -131,7 +131,18 @@ export default function ProductDetail() {
       </Link>
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div className="bg-gray-100 aspect-square">
-          <img src={product.image_url} alt={product.name} className="w-full h-full object-cover" />
+          <img
+            src={product.image_url}
+            alt={product.name}
+            onError={(e) => {
+              const img = e.currentTarget;
+              if (!img.dataset.fallback) {
+                img.dataset.fallback = '1';
+                img.src = '/img/placeholder.svg';
+              }
+            }}
+            className="w-full h-full object-cover"
+          />
         </div>
         <div className="flex flex-col justify-center">
           <p className="text-sm text-gray-500 capitalize mb-2">{product.category}</p>

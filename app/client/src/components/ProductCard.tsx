@@ -16,6 +16,14 @@ export default function ProductCard({ product }: { product: Product }) {
         <img
           src={product.image_url}
           alt={product.name}
+          loading="lazy"
+          onError={(e) => {
+            const img = e.currentTarget;
+            if (!img.dataset.fallback) {
+              img.dataset.fallback = '1';
+              img.src = '/img/placeholder.svg';
+            }
+          }}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
       </div>
