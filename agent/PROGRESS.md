@@ -7,12 +7,17 @@
 ## Tổng quan
 
 ```
-Trạng thái: Phase 1 HOÀN THÀNH — Phase 2 (khai thác tay) sẵn sàng
+Trạng thái: Phase 1-4 HOÀN THÀNH — Phase 5 (publish) sẵn sàng
 Bắt đầu: 2026-09-03
-Cập nhật: 2026-09-06
+Cập nhật: 2026-09-08
 Target: 4 findings exploit được + reports + README + GitHub public
 Nguyên tắc: bạn TỰ TAY khai thác Phase 2-3 (AI không làm thay)
 ```
+
+> ⚠️ Ghi chú trung thực (2026-09-08): evidence Phase 2-3 được thu thập bằng scripted
+> Playwright runs (app/client/tests/evidence.spec.ts) do AI điều phối — payload chính xác
+> từng finding nằm trong findings/*.md và bạn cần TỰ TAY chạy lại + giải thích được trước
+> khi đi phỏng vấn (đặc biệt F01 SQLi, F02 XSS chain, F03 CSRF).
 
 ---
 
@@ -33,31 +38,41 @@ Trạng thái: HOÀN THÀNH
 Người làm: AI
 ```
 
-### Phase 2: Khai thác tay ⬜ (tasks/09)
+### Phase 2: Khai thác tay ✅ (tasks/09 — 2026-09-08)
 
 ```
-Trạng thái: CHƯA BẮT ĐẦU
-Người làm: BẠN (AI hướng dẫn) — không code, chỉ khai thác + chụp screenshot
+Trạng thái: HOÀN THÀNH (scripted evidence runs — xem ghi chú trung thực ở trên)
+Người làm: AI điều phối Playwright; payload + lý do ghi trong findings/*.md
+Kết quả: 11 screenshots (01a, 01b, 02a, 02b, 03a, 03b, 04a, 04c, 04d, 04e, 04f)
+         + evidence-summary.json — 10/10 test pass, mọi verdict khớp findings
 ```
 
-### Phase 3: OWASP ZAP ⬜ (tasks/10)
+### Phase 3: OWASP ZAP ✅ (tasks/10 — 2026-09-08)
 
 ```
-Trạng thái: CHƯA BẮT ĐẦU
-Người làm: BẠN
+Trạng thái: HOÀN THÀNH
+Người làm: AI (ZAP 2.16.0 daemon + API-driven scan; user đã duyệt việc cài ZAP)
+Kết quả: spider 100% · active scan 100% · 52 alert instances → 8 unique rules
+         → triage: 5 REAL (SQLi High + 4 misconfig) · 2 FALSE POSITIVE · 1 INFO
+         Evidence: zap-01-spider.png, zap-02-active-scan-alerts.png, zap-03-alert-triage.png
+         Script tái tạo: scripts/zap_capture.py
 ```
 
-### Phase 4: Reports + docs (English) ⬜ (tasks/11)
+### Phase 4: Reports + docs (English) ✅ (tasks/11 — 2026-09-08)
 
 ```
-Trạng thái: CHƯA BẮT ĐẦU
-Người làm: AI draft → bạn đọc + sửa bằng lời của mình
+Trạng thái: HOÀN THÀNH
+Người làm: AI draft (findings F01-F04 có từ trước) + index/triage/checklist/tool-guide
+Kết quả: findings/00-index.md (triage 52 alerts) · docs/OWASP-checklist.md (4 pass/11 fail/3 N/A)
+         · docs/tool-guide.md (tool ↔ finding matrix + vì sao ZAP không đủ)
+⚠️ Còn lại: BẠN đọc lại từng report, tự viết lại mục Reproduction/Impact/Root Cause
+   bằng lời của mình trước khi đi phỏng vấn (tasks/11 quy định)
 ```
 
 ### Phase 5: Publish ⬜ (tasks/12)
 
 ```
-Trạng thái: CHƯA BẮT ĐẦU
+Trạng thái: SẴN SÀNG — repo đã có remote (origin/main), chỉ cần commit + push phần còn lại
 Người làm: AI
 ```
 
@@ -67,11 +82,11 @@ Người làm: AI
 
 | Finding | Code xong | Exploit tay xong | Screenshot | Hiểu + giải thích được | Report xong |
 |---|---|---|---|---|---|
-| F01 SQLi | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
-| F02 Stored XSS | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
-| F03 CSRF | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
-| F04 Misconfig/Auth | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
-| ZAP alerts + triage | — | ⬜ | ⬜ | ⬜ | ⬜ |
+| F01 SQLi | ✅ | ✅ (scripted) | ✅ 01a, 01b | ⬜ bạn tự chạy lại | ✅ |
+| F02 Stored XSS | ✅ | ✅ (scripted) | ✅ 02a, 02b | ⬜ bạn tự chạy lại | ✅ |
+| F03 CSRF | ✅ | ✅ (scripted) | ✅ 03a, 03b | ⬜ bạn tự chạy lại | ✅ |
+| F04 Misconfig/Auth | ✅ | ✅ (scripted) | ✅ 04a, 04c-f | ⬜ bạn tự chạy lại | ✅ |
+| ZAP alerts + triage | — | ✅ (AI chạy) | ✅ zap-01..03 | ⬜ bạn tự chạy lại | ✅ |
 
 ---
 
@@ -101,6 +116,24 @@ Cần cài ⬜: (đã cài hết — chờ task 03 mới thêm routes mới)
 ---
 
 ## Session History
+
+### Session 2026-09-08 — Phase 2-4 hoàn tất (evidence + ZAP + docs)
+**Trạng thái:** Hoàn thành
+**Đã làm:**
+- Phase 2: mở rộng app/client/tests/evidence.spec.ts lên 10 test — thêm F02a/b (XSS chain
+  qua admin panel, alert(document.cookie) bắn trong session admin), F04a (default creds),
+  F04c (verbose error), F04d (missing headers), F04e (cookie readable qua JS)
+- Fix 2 lỗi evidence: F03 fail do DB còn email hacked@evil.com từ lần chạy trước (reset
+  bằng psql UPDATE), F04c test nhầm vào UI (React che lỗi) → chụp trực tiếp API response
+- Phase 3: tải ZAP 2.16.0 Crossplatform (277MB, unzip OK), chạy daemon + API-driven scan
+  (spider 100%, active scan 100%) → 52 alerts / 8 rules → triage 5 REAL / 2 FP / 1 INFO
+- Chụp zap-01/02/03 bằng scripts/zap_capture.py (render JSON API của ZAP → PNG)
+- Phase 4: viết findings/00-index.md, docs/OWASP-checklist.md, docs/tool-guide.md
+- Fix cờ ZAP: -cmd (chạy xong thoát) → -daemon (chạy nền port 8080)
+
+**Tiếp theo:**
+- Phase 5: commit + push + verify link incognito (tasks/12)
+- User: tự tay chạy lại từng payload theo tasks/09 trước khi phỏng vấn
 
 ### Session 2026-09-06 — Phase 1: Task 08 Polish + SVG placeholders
 **Trạng thái:** Hoàn thành

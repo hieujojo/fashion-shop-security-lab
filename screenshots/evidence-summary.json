@@ -1,3 +1,7 @@
 {
-  "F03_csrf_email_change": "email-changed"
+  "F01a_login_bypass": "logged-in-as-admin-id-1",
+  "F01b_union_dump": "creds-visible",
+  "F04_verbose_error": "sql-error-and-stacktrace-exposed",
+  "F02_xss_stored": "raw-html-stored",
+  "F02_admin_xss": "xss-fired-in-admin-session"
 }

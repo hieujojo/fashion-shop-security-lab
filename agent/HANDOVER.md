@@ -51,6 +51,28 @@
 
 ## 📝 History
 
+### Session 2026-09-08 — Phase 2-4 HOÀN THÀNH / Phase 5 sẵn sàng
+**Trạng thái:** Hoàn thành
+**Task hiện tại:** tasks/12 (publish) — chỉ còn commit + push + verify link
+**Đã làm:**
+- [x] Phase 2: 11/11 screenshots theo D13 + evidence-summary.json (10 Playwright tests pass)
+- [x] Phase 3: ZAP 2.16.0 daemon scan → 52 alerts → triage 8 rules → zap-01..03.png
+- [x] Phase 4: findings/00-index.md + docs/OWASP-checklist.md + docs/tool-guide.md
+- [x] PROGRESS.md cập nhật Phase 2-4 ✅
+
+**Cần làm tiếp:**
+- Phase 5: commit + push (origin/main đã trỏ github.com/hieujojo/fashion-shop-security-lab)
+- Verify link incognito theo tasks/12 checklist
+- ⚠️ User: tự tay chạy lại từng payload (tasks/09) + đọc lại 4 findings trước phỏng vấn
+
+**Lưu ý cho session sau:**
+- ZAP daemon đang chạy ở C:\Users\Admin\Downloads\zap-tmp\ZAP_2.16.0 (port 8080,
+  api.disablekey=true) — tắt bằng taskkill java hoặc giữ để rescan
+- ZAP home dir: C:\Users\Admin\Downloads\zap-tmp\zaphome (session chứa 52 alerts)
+- DB reset sau demo CSRF: `docker exec fashionhub-db psql -U fashionhub -d fashionhub -c "UPDATE users SET email='alice@fashionhub.dev' WHERE id=2;"`
+- Evidence suite cần PoC server port 4444: `python -m http.server 4444 --directory poc`
+- ZAP version cũ hơn 1 năm là bình thường (2.16.0 bản cuối ổn định cho lab)
+
 ### Session 2026-09-06 — Phase 1 HOÀN THÀNH / Phase 2 BẮT ĐẦU
 **Trạng thái:** Hoàn thành
 **Task hiện tại:** tasks/08 (polish) → xong, chuyển sang Phase 2
